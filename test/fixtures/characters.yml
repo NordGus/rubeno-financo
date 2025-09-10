@@ -2,8 +2,8 @@
 
 one:
   tag: 'character-01'
-  keys_version: <%= SecureRandom.uuid_v7 %>
+  padlock_version: <%= SecureRandom.uuid_v7 %>
 
 two:
   tag: 'character-02'
-  keys_version: <%= SecureRandom.uuid_v7 %>
+  padlock_version: <%= SecureRandom.uuid_v7 %>

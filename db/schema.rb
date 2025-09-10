@@ -13,10 +13,10 @@
 ActiveRecord::Schema[8.0].define(version: 2025_09_09_182501) do
   create_table "characters", force: :cascade do |t|
     t.string "tag", null: false
-    t.string "keys_version", null: false
+    t.string "padlock_version", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["keys_version"], name: "characters_keys_version_index"
+    t.index ["padlock_version"], name: "characters_padlock_version_index"
     t.index ["tag"], name: "characters_tags_index", unique: true
   end
 end

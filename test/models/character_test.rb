@@ -5,13 +5,13 @@ class CharacterTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  test "#replace_all_locks!" do
+  test "#replace_padlock!" do
     character = characters(:one)
 
-    previous_keys_version = character.keys_version
+    previous_padlock_version = character.padlock_version
 
-    character.replace_all_locks!
+    character.replace_padlock!
 
-    assert character.keys_version != previous_keys_version, "keys_version did not changed"
+    assert character.padlock_version != previous_padlock_version, "padlock_version did not changed"
   end
 end
