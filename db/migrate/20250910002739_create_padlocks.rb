@@ -7,6 +7,6 @@ class CreatePadlocks < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :padlocks, [:character_id, :keyable_id, :keyable_type], unique: true, name: :padlocks_character_keyable_uniqueness
+    add_index :padlocks, [ :character_id, :keyable_id, :keyable_type ], unique: true, name: :padlocks_character_keyable_uniqueness
   end
 end
