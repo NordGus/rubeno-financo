@@ -1,10 +1,6 @@
 require "test_helper"
 
 class CharacterTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "#replace_padlock!" do
     character = characters(:one)
 

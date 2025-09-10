@@ -35,8 +35,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_004439) do
     t.datetime "last_sign_in"
     t.datetime "blocked_at"
     t.integer "attempted_access_count"
+    t.string "key_version", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["key_version"], name: "password_keys_key_version_index"
   end
 
   add_foreign_key "padlocks", "characters"
