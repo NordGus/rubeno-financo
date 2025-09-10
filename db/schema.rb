@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_09_182501) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_10_004439) do
   create_table "characters", force: :cascade do |t|
     t.string "tag", null: false
     t.string "padlock_version", null: false
@@ -19,4 +19,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_09_182501) do
     t.index ["padlock_version"], name: "characters_padlock_version_index"
     t.index ["tag"], name: "characters_tags_index", unique: true
   end
+
+  create_table "padlocks", force: :cascade do |t|
+    t.integer "character_id", null: false
+    t.string "keyable_type"
+    t.integer "keyable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_padlocks_on_character_id"
+    t.index ["keyable_type", "keyable_id"], name: "index_padlocks_on_keyable"
+  end
+
+  create_table "password_keys", force: :cascade do |t|
+    t.string "password_digest"
+    t.datetime "last_sign_in"
+    t.datetime "blocked_at"
+    t.integer "attempted_access_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "padlocks", "characters"
 end
