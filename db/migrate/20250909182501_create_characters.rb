@@ -1,13 +1,13 @@
 class CreateCharacters < ActiveRecord::Migration[8.0]
   def change
     create_table :characters do |t|
+      t.string :email_address, null: false
       t.string :tag, null: false
-      t.string :padlock_version, null: false
 
       t.timestamps
     end
 
-    add_index :characters, :tag, unique: true, name: :characters_tags_index
-    add_index :characters, :padlock_version, name: :characters_padlock_version_index
+    add_index :characters, :email_address, unique: true, name: :characters_email_address_uniqueness_index
+    add_index :characters, :tag, unique: true, name: :characters_tag_uniqueness_index
   end
 end

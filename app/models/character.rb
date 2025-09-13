@@ -1,13 +1,12 @@
 class Character < ApplicationRecord
-  validates :tag, uniqueness: true, presence: true, length: { minimum: 7, maximum: 256 }
-  validates :padlock_version, presence: true
+  includes EmailValidator
 
-  before_validation ->(character) { character.tag = character.tag.gsub(/\s+/, "") }
-  before_validation ->(character) { character.padlock_version = SecureRandom.uuid_v7 }, if: :new_record?
+  validates :email_address, uniqueness: true, presence: true, email: true
+  validates :tag, uniqueness: true, presence: true, length: { maximum: 256 }
 
-  has_many :padlocks, dependent: :destroy
+  normalizes :email_address, with: ->(email) { email.strip.downcase }
+  normalizes :tag, with: ->(tag) { tag.strip.gsub(/\s+/, "") }
 
-  def replace_padlock!
-    update(padlock_version: SecureRandom.uuid_v7)
-  end
+  has_many :padlocks, inverse_of: :character, dependent: :destroy
+  has_many :sessions, inverse_of: :character, dependent: :destroy
 end
