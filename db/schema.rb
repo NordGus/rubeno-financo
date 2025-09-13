@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_12_222713) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_13_170200) do
   create_table "characters", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "tag", null: false
@@ -34,11 +34,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_222713) do
   create_table "password_keys", force: :cascade do |t|
     t.string "password_digest"
     t.datetime "last_sign_in_at"
-    t.datetime "blocked_at"
-    t.integer "attempted_access_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["blocked_at"], name: "password_key_blocked_at_idx"
   end
 
   create_table "sessions", force: :cascade do |t|
