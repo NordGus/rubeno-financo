@@ -1,0 +1,40 @@
+/* Base color variables (light mode by default) */
+
+:root {
+    --color-bg: #ffffff;
+    --color-text: #1a1a1a;
+    --color-primary: #3b82f6; /* blue-500 */
+    --color-secondary: #9333ea; /* purple-600 */
+    --color-border: #e5e7eb;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #0f172a;
+        --color-text: #f1f5f9;
+        --color-primary: #60a5fa; /* lighter blue */
+        --color-secondary: #a855f7;
+        --color-border: #334155;
+    }
+}
+
+/* Example usage */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: system-ui, sans-serif;
+}
+
+button {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--color-secondary);
+}
