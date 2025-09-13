@@ -9,4 +9,5 @@ class Character < ApplicationRecord
 
   has_many :padlocks, inverse_of: :character, dependent: :destroy
   has_many :sessions, inverse_of: :character, dependent: :destroy
+  has_many :archives, inverse_of: :character, dependent: :destroy
 end

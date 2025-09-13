@@ -7,7 +7,7 @@ class CreateCharacters < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :characters, :email_address, unique: true, name: :characters_email_address_uniqueness_index
-    add_index :characters, :tag, unique: true, name: :characters_tag_uniqueness_index
+    add_index :characters, :email_address, unique: true, name: :characters_email_address_uniqueness_idx
+    add_index :characters, :tag, unique: true, name: :characters_tag_uniqueness_idx
   end
 end
