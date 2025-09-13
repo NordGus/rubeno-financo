@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
   def create
     key_by_email = PasswordKey.includes(:character).authenticate_by(character: { email_address: params[:username] }, password: params[:password])
     key_by_tag = PasswordKey.includes(:character).authenticate_by(character: { tag: params[:username] }, password: params[:password])
+    key = key_by_email || key_by_tag
 
-    if key_by_email.presence || key_by_tag.presence
-      start_new_session_for key_by_email.presence || key_by_tag.presence
+    if key
+      key.update!(last_sign_in_at: Time.zone.now)
+      start_new_session_for key
       redirect_to after_authentication_url
     else
       redirect_to new_session_path, alert: "Try another email address, tag or password."
