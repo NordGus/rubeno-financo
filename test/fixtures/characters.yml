@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  email_address: 'character-01@example.com'
   tag: 'character-01'
-  padlock_version: <%= SecureRandom.uuid_v7 %>
 
 two:
+  email_address: 'character-02@example.com'
   tag: 'character-02'
-  padlock_version: <%= SecureRandom.uuid_v7 %>
