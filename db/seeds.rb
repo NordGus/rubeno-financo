@@ -7,3 +7,21 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+ActiveRecord::Base.transaction do
+  protagonist = Character
+                  .includes(:padlocks)
+                  .create_with(email_address: 'protagonist@example.com')
+                  .find_or_create_by!(tag: 'protagonist')
+
+  if protagonist.padlocks.none?
+    protagonist.padlocks.create!(
+      keyable: PasswordKey.create!(
+        password: 'change me',
+        password_confirmation: 'change me'
+      )
+    )
+  end
+
+  # Add additional seeds
+end
