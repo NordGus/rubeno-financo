@@ -35,12 +35,3 @@ body {
     color: var(--color-text);
     font-family: monospace, ui-monospace, system-ui, sans-serif;
 }
-
-
-input:not([type='submit']), textarea, select {
-    background-color: var(--color-bg);
-    border: 2px solid var(--color-bg-adcent);
-    padding: 0.5rem 0.75rem;
-    border-radius: 0;
-    line-height: 1;
-}
