@@ -6,6 +6,7 @@
     --color-primary: #3b82f6; /* blue-500 */
     --color-secondary: #9333ea; /* purple-600 */
     --color-border: #e5e7eb;
+    --color-link: #ffffff;
 }
 
 /* Dark mode overrides */
@@ -24,17 +25,4 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: monospace, ui-monospace, system-ui, sans-serif;
-}
-
-button, input[type=submit] {
-    background: var(--color-primary);
-    color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-button:hover {
-    background: var(--color-secondary);
 }
