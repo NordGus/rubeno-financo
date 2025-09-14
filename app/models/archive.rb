@@ -1,7 +1,7 @@
 class Archive < ApplicationRecord
-  belongs_to :owner, class_name: "Character", inverse_of: :archives, foreign_key: :owner_id
-  has_many :sessions, inverse_of: :archive, dependent: :nullify, foreign_key: :archive_id
-  has_many :access_keys, class_name: "Archive::AccessKey", dependent: :destroy, inverse_of: :archive
+  belongs_to :owner, class_name: "Character", foreign_key: :owner_id
+  has_many :sessions, dependent: :nullify, foreign_key: :archive_id
+  has_many :access_keys, class_name: "Archive::AccessKey", dependent: :destroy
 
   default_scope { includes(:access_keys) }
 
@@ -10,10 +10,10 @@ class Archive < ApplicationRecord
     owned_by(character_id)
       .or(
           where(access_keys: { owner_id: character_id })
-            .where(access_keys: { expires_at: [ ">= ?", Time.zone.now ] })
+            .where('"access_keys"."expires_at" >= ?', Time.zone.now)
             .or(
               where(access_keys: { owner_id: character_id })
-              .where(access_keys: { expires_at: nil })
+                .where(access_keys: { expires_at: nil })
             )
       )
   end

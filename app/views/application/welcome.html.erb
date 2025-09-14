@@ -1,12 +1,26 @@
 <h1>Hello <%= Current.character.tag %>, welcome to financo</h1>
 <%= button_to "Close Session", session_path, method: :delete %>
 <section>
-  <% if Current.character.accessible_archives.none? %>
+  <% if @accessible_archives.none? %>
     <p>You don't have access to any Archive, yet!</p>
   <% else %>
     <ul>
-      <% Archive.accessible_by(Current.character.id).each do |archive| %>
-        <li><%= archive.name %></li>
+      <% @accessible_archives.each do |archive| %>
+        <li>
+          <div>
+            <%= archive.name %>
+          </div>
+          <span>
+            <%= archive.description %>
+          </span>
+          <span style="opacity:70%">
+            <% if Current.character.id == archive.owner.id %>
+              You
+            <% else %>
+              <%= archive.owner.tag %>
+            <% end %>
+          </span>
+        </li>
       <% end %>
     </ul>
   <% end %>

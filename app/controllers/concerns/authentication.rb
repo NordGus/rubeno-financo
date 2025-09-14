@@ -26,7 +26,7 @@ module Authentication
     end
 
     def find_session_by_cookie
-      Session.includes(character: [ :accessible_archives ], archive: []).find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
+      Session.includes(:archive, :character).find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
     end
 
     def request_authentication
