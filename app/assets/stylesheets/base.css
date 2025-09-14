@@ -2,6 +2,7 @@
 
 :root {
     --color-bg: #ffffff;
+    --color-bg-adcent: #9e9e9e;
     --color-text: #1a1a1a;
     --color-primary: #3b82f6; /* blue-500 */
     --color-secondary: #9333ea; /* purple-600 */
@@ -19,7 +20,8 @@
 /* Dark mode overrides */
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg: #0f172a;
+        --color-bg: #090909;
+        --color-bg-adcent: #232323;
         --color-text: #f1f5f9;
         --color-primary: #60a5fa; /* lighter blue */
         --color-secondary: #a855f7;
@@ -32,4 +34,13 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: monospace, ui-monospace, system-ui, sans-serif;
+}
+
+
+input:not([type='submit']), textarea, select {
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-bg-adcent);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0;
+    line-height: 1;
 }
