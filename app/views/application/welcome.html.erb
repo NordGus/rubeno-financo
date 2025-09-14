@@ -1,2 +1,13 @@
 <h1>Hello <%= Current.character.tag %>, welcome to financo</h1>
 <%= button_to "Close Session", session_path, method: :delete %>
+<section>
+  <% if Current.character.accessible_archives.none? %>
+    <p>You don't have access to any Archive, yet!</p>
+  <% else %>
+    <ul>
+      <% Archive.accessible_by(Current.character.id).each do |archive| %>
+        <li><%= archive.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
