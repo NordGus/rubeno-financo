@@ -5,4 +5,7 @@ class Archive < ApplicationRecord
   scope :accessible_by, ->(character_id) { where(character_id:) }
   scope :editable_by, ->(character_id) { where(character_id:) }
   scope :configurable_by, ->(character_id) { where(character_id:) }
+
+  validates :name, presence: true, length: { maximum: 256 }
+  validates :description, length: { maximum: 1_000 }
 end
