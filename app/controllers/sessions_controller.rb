@@ -2,15 +2,13 @@ class SessionsController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Try again later." }
 
+  before_action :ensure_protagonist_exists, only: :new
+
   def new
   end
 
   def create
-    key_by_email = PasswordKey.includes(:character).authenticate_by(character: { email_address: params[:username] }, password: params[:password])
-    key_by_tag = PasswordKey.includes(:character).authenticate_by(character: { tag: params[:username] }, password: params[:password])
-    key = key_by_email || key_by_tag
-
-    if key
+    if (key = PasswordKey.authenticate(username: params[:username], password: params[:password]))
       key.update!(last_sign_in_at: Time.zone.now)
       start_new_session_for key
       redirect_to after_authentication_url
@@ -22,5 +20,11 @@ class SessionsController < ApplicationController
   def destroy
     terminate_session
     redirect_to new_session_path
+  end
+
+  private
+
+  def ensure_protagonist_exists
+    redirect_to first_run_url if Character.none?
   end
 end
