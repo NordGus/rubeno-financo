@@ -1,0 +1,31 @@
+<section class="signup">
+  <h1>Starting your financo!</h1>
+  <p>Please create your main user</p>
+
+  <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+  <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+  <%= form_with model: @character, url: first_run_url do |form| %>
+    <%= form.label :username %>
+    <%= form.text_field :username, required: true %>
+    <% @character.errors.where(:username).each do |error| %>
+      <span><%= error.message %></span>
+    <% end %>
+    <%= form.label :email_address %>
+    <%= form.text_field :email_address, required: true %>
+    <% @character.errors.where(:email_address).each do |error| %>
+      <span><%= error.message %></span>
+    <% end %>
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true, maxlength: 72 %>
+    <% @character.errors.where(:password).each do |error| %>
+      <span><%= error.message %></span>
+    <% end %>
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, required: true, maxlength: 72 %>
+    <% @character.errors.where(:password_confirmation).each do |error| %>
+      <span><%= error.message %></span>
+    <% end %>
+    <%= form.submit "Create" %>
+  <% end %>
+</section>
