@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationForm
+class ApplicationSchema
   include ActiveModel::Model
   include ActiveModel::Attributes
   include ActiveModel::SecurePassword

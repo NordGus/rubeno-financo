@@ -4,11 +4,11 @@ class FirstRunsController < ApplicationController
   before_action :prevent_repeats
 
   def show
-    @character = FirstRunForm.new
+    @character = FirstRunSchema.new
   end
 
   def create
-    @character = FirstRunForm.new(character_params)
+    @character = FirstRunSchema.new(character_params)
 
     if @character.valid?
       key, archive = FirstRun.create!(@character)

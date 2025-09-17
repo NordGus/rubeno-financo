@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
-class Character::CreateForm < ApplicationForm
+# FirstRunForm is the data representation and schema validator for the first run process.
+class FirstRunSchema < ApplicationSchema
   has_secure_password
-
   define_model_callbacks :initialize, only: [ :after ]
+
+  attr_accessor :password, :password_confirmation
 
   attribute :username, :string
   attribute :email_address, :string
@@ -18,16 +20,7 @@ class Character::CreateForm < ApplicationForm
   after_initialize :normalize_email_address
   after_initialize :normalize_tag
 
-  def self.model_name
-    ActiveModel::Name.new(self, nil, "Character")
-  end
-
-  def new_record?
-    true
-  end
-
   private
-
     def email_address_uniqueness_validation
       errors.add(:email_address, :uniqueness) unless Character.where(email_address:).none?
     end
