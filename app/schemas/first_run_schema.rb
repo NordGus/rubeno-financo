@@ -5,8 +5,6 @@ class FirstRunSchema < ApplicationSchema
   has_secure_password
   define_model_callbacks :initialize, only: [ :after ]
 
-  attr_accessor :password, :password_confirmation
-
   attribute :username, :string
   attribute :email_address, :string
   attribute :password_digest, :string

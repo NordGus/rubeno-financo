@@ -7,6 +7,10 @@ class ApplicationSchema
   include ActiveModel::Callbacks
 
   def new_record?
-    !id.present?
+    !id&.present?
+  end
+
+  def self.model_name
+    ActiveModel::Name.new(self, nil, name.gsub(/Schema$/, ""))
   end
 end
