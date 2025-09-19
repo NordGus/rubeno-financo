@@ -26,7 +26,11 @@ module Authentication
     end
 
     def find_session_by_cookie
-      Session.includes(:archive, :character).find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
+      if cookies.signed[:session_id]
+        session = Session.includes(:archive, :character).find_by(id: cookies.signed[:session_id])
+        Session::UpdateLastSignedInAtJob.perform_later(session) if session.present?
+        session
+      end
     end
 
     def request_authentication
@@ -39,7 +43,11 @@ module Authentication
     end
 
     def start_new_session_for(key)
-      key.character.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
+      key.character.sessions.create!(
+        user_agent: request.user_agent,
+        ip_address: request.remote_ip,
+        last_signed_in_at: Time.zone.now,
+      ).tap do |session|
         Current.session = session
         cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
       end

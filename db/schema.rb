@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_14_102735) do
+ActiveRecord::Schema[8.1].define(version: 2025_09_19_161007) do
   create_table "archive_access_keys", force: :cascade do |t|
-    t.integer "owner_id", null: false
     t.integer "archive_id", null: false
-    t.datetime "expires_at"
     t.datetime "can_edit_since"
     t.datetime "created_at", null: false
+    t.datetime "expires_at"
+    t.integer "owner_id", null: false
     t.datetime "updated_at", null: false
     t.index ["archive_id"], name: "index_archive_access_keys_on_archive_id"
     t.index ["can_edit_since"], name: "archive_access_key_can_edit_since_idx"
@@ -25,19 +25,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_14_102735) do
   end
 
   create_table "archives", force: :cascade do |t|
-    t.integer "owner_id", null: false
-    t.string "name", null: false
-    t.text "description"
     t.datetime "created_at", null: false
+    t.text "description"
+    t.string "name", null: false
+    t.integer "owner_id", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "archives_name_idx"
     t.index ["owner_id"], name: "index_archives_on_owner_id"
   end
 
   create_table "characters", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "email_address", null: false
     t.string "tag", null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "characters_email_address_uniqueness_idx", unique: true
     t.index ["tag"], name: "characters_tag_uniqueness_idx", unique: true
@@ -45,9 +45,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_14_102735) do
 
   create_table "padlocks", force: :cascade do |t|
     t.integer "character_id", null: false
-    t.string "keyable_type"
-    t.integer "keyable_id"
     t.datetime "created_at", null: false
+    t.integer "keyable_id"
+    t.string "keyable_type"
     t.datetime "updated_at", null: false
     t.index ["character_id", "keyable_id", "keyable_type"], name: "padlocks_character_keyable_uniqueness_idx", unique: true
     t.index ["character_id"], name: "index_padlocks_on_character_id"
@@ -55,20 +55,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_14_102735) do
   end
 
   create_table "password_keys", force: :cascade do |t|
-    t.string "password_digest"
-    t.datetime "last_sign_in_at"
     t.datetime "created_at", null: false
+    t.datetime "last_sign_in_at"
+    t.string "password_digest"
     t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "character_id", null: false
-    t.string "ip_address"
-    t.string "user_agent"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "archive_id"
+    t.integer "character_id", null: false
+    t.datetime "created_at", null: false
+    t.string "ip_address"
+    t.datetime "last_signed_in_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "user_agent"
     t.index ["character_id"], name: "index_sessions_on_character_id"
+    t.index ["last_signed_in_at"], name: "sessions_last_signed_in_at_idx"
   end
 
   add_foreign_key "archive_access_keys", "archives"
