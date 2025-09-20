@@ -23,6 +23,8 @@
   </head>
 
   <body>
+    <%= link_to "Close Session", session_path, data: { turbo_method: :delete } %>
+
     <%= yield %>
   </body>
 </html>
