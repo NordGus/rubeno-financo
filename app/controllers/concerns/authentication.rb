@@ -32,11 +32,7 @@ module Authentication
     end
 
     def find_session_by_cookie
-      if cookies.signed[:session_id]
-        session = Session.includes(:archive, :character).find_by(token: cookies.signed[SESSION_IDENTIFIER_KEY])
-        Session::UpdateLastSignedInAtJob.perform_later(session) if session.present?
-        session
-      end
+      Session.includes(:archive, :character).find_by(token: cookies.signed[SESSION_IDENTIFIER_KEY]) if cookies.signed[SESSION_IDENTIFIER_KEY]
     end
 
     def request_authentication
@@ -49,11 +45,7 @@ module Authentication
     end
 
     def start_new_session_for(key)
-      key.character.sessions.create!(
-        user_agent: request.user_agent,
-        ip_address: request.remote_ip,
-        last_signed_in_at: Time.zone.now,
-      ).tap do |session|
+      key.character.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
 
         # Enforcing a 6 hours lifespan for the user session. I'm doing this as a paranoia induced security feature.
