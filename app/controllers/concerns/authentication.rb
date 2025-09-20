@@ -55,6 +55,12 @@ module Authentication
         last_signed_in_at: Time.zone.now,
       ).tap do |session|
         Current.session = session
+
+        # Enforcing a 6 hours lifespan for the user session. I'm doing this as a paranoia induced security feature.
+        # In case the user's cookies are compromised, any undesired access can be mitigated under the presumption
+        # that the session is probably already dead.
+        Session::DestroyJob.set(wait: Session::MAX_LIFESPAN).perform_later(session)
+
         cookies.signed.permanent[SESSION_IDENTIFIER_KEY] = { value: session.token, httponly: true, same_site: :lax }
       end
     end

@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Session::UpdateLastSignedInAtJobTest < ActiveJob::TestCase
+class Session::DestroyJobTest < ActiveJob::TestCase
   # test "the truth" do
   #   assert true
   # end

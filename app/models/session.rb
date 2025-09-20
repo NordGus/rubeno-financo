@@ -1,4 +1,6 @@
 class Session < ApplicationRecord
+  MAX_LIFESPAN = 60.hours
+
   has_secure_token length: 64
 
   belongs_to :character, inverse_of: :sessions

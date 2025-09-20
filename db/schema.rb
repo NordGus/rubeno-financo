@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_19_161007) do
+ActiveRecord::Schema[8.1].define(version: 2025_09_20_142757) do
   create_table "archive_access_keys", force: :cascade do |t|
     t.integer "archive_id", null: false
     t.datetime "can_edit_since"
@@ -66,11 +66,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_09_19_161007) do
     t.integer "character_id", null: false
     t.datetime "created_at", null: false
     t.string "ip_address"
-    t.datetime "last_signed_in_at", null: false
+    t.string "token", null: false
     t.datetime "updated_at", null: false
     t.string "user_agent"
     t.index ["character_id"], name: "index_sessions_on_character_id"
-    t.index ["last_signed_in_at"], name: "sessions_last_signed_in_at_idx"
+    t.index ["token"], name: "sessions_token_uniqueness_idx", unique: true
   end
 
   add_foreign_key "archive_access_keys", "archives"
