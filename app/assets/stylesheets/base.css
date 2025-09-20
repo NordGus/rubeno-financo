@@ -7,7 +7,7 @@
     --color-primary: #3b82f6; /* blue-500 */
     --color-secondary: #9333ea; /* purple-600 */
     --color-border: #e5e7eb;
-    --color-link: #ffffff;
+    --color-link: #006fff;
 
     /* spacing */
     --spacing-1: 0.25rem;
@@ -26,6 +26,7 @@
         --color-primary: #60a5fa; /* lighter blue */
         --color-secondary: #a855f7;
         --color-border: #334155;
+        --color-link: #3892ff;
     }
 }
 
@@ -34,4 +35,8 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: monospace, ui-monospace, system-ui, sans-serif;
+}
+
+a {
+    color: var(--color-link);
 }
