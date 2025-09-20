@@ -1,5 +1,11 @@
+# frozen_string_literal: true
+
 module Authentication
   extend ActiveSupport::Concern
+
+  SESSION_IDENTIFIER_KEY = :session_token
+
+  private_constant :SESSION_IDENTIFIER_KEY
 
   included do
     before_action :require_authentication
@@ -27,7 +33,7 @@ module Authentication
 
     def find_session_by_cookie
       if cookies.signed[:session_id]
-        session = Session.includes(:archive, :character).find_by(id: cookies.signed[:session_id])
+        session = Session.includes(:archive, :character).find_by(token: cookies.signed[SESSION_IDENTIFIER_KEY])
         Session::UpdateLastSignedInAtJob.perform_later(session) if session.present?
         session
       end
@@ -49,12 +55,12 @@ module Authentication
         last_signed_in_at: Time.zone.now,
       ).tap do |session|
         Current.session = session
-        cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
+        cookies.signed.permanent[SESSION_IDENTIFIER_KEY] = { value: session.token, httponly: true, same_site: :lax }
       end
     end
 
     def terminate_session
       Current.session.destroy
-      cookies.delete(:session_id)
+      cookies.delete(SESSION_IDENTIFIER_KEY)
     end
 end
