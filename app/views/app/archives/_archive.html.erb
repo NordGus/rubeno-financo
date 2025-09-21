@@ -1,0 +1,15 @@
+<div id="<%= dom_id archive %>">
+  <h3><%= archive.name %></h3>
+  <p><%= archive.description %></p>
+  <div>
+    <% if archive.can_configure? character_id %>
+      <%= link_to "Configure this archive", edit_app_archive_url(archive) %>
+    <% elsif archive.can_edit? character_id %>
+      <span>You have edit access!</span>
+    <% elsif archive.can_access? character_id %>
+      <span>You have read access!</span>
+    <% end %>
+
+    <%= link_to "Select this archive", access_app_archive_url(archive), data: { turbo_method: :post } %>
+  </div>
+</div>

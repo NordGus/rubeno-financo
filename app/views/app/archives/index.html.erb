@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Archives" %>
+
+<h1>Archives</h1>
+
+<div id="archives">
+  <%=
+    render partial: 'archive',
+           collection: @archives,
+           as: :archive,
+           locals: {
+             character_id: Current.character.id
+           }
+  %>
+</div>
+
+<%= link_to "New archive", new_app_archive_path %>
