@@ -34,7 +34,7 @@
 body {
     background-color: var(--color-bg);
     color: var(--color-text);
-    font-family: monospace, ui-monospace, system-ui, sans-serif;
+    font-family: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 a {
