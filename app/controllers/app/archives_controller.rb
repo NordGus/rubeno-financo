@@ -18,7 +18,8 @@ class App::ArchivesController < AppController
     @archive = App::ArchiveSchema.new(
       id: @archive.id,
       name: @archive.name,
-      description: @archive.description
+      description: @archive.description,
+      owner: @archive.owner
     )
   end
 
@@ -73,6 +74,6 @@ class App::ArchivesController < AppController
     end
 
     def archive_params
-      params.fetch(:archive, {})
+      params.require(:archive).permit(:name, :description)
     end
 end
