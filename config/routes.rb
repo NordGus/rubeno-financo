@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   root "app/welcome#index"
 
   resource :first_run, only: [ :show, :create ]
