@@ -1,24 +1,25 @@
 class App::ArchivesController < AppController
   allow_out_of_archive_access
 
-  before_action :set_archive, only: %i[ show edit update destroy access ]
+  before_action :set_archive, only: %i[ edit update destroy ]
 
   # GET /app/archives or /app/archives.json
   def index
     @archives = Archive.accessible_by(Current.character.id)
   end
 
-  # GET /app/archives/1 or /app/archives/1.json
-  def show
-  end
-
   # GET /app/archives/new
   def new
-    @archive = Archive.new
+    @archive = App::ArchiveSchema.new
   end
 
   # GET /app/archives/1/edit
   def edit
+    @archive = App::ArchiveSchema.new(
+      id: @archive.id,
+      name: @archive.name,
+      description: @archive.description
+    )
   end
 
   # POST /app/archives or /app/archives.json
@@ -59,19 +60,18 @@ class App::ArchivesController < AppController
     end
   end
 
+  # POST /app/archives/1/access
   def access
+    @archive = Archive.accessible_by(Current.character.id).find(params.expect(:id))
     Current.session.update!(archive: @archive)
-
     redirect_to root_url, notice: "#{@archive.name} selected!"
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_archive
-      @archive = Archive.accessible_by(Current.character.id).find(params.expect(:id))
+      @archive = Current.character.archives.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     def archive_params
       params.fetch(:archive, {})
     end
