@@ -2,10 +2,9 @@
 
 one:
   owner: one
-  name: MyString
-  description: MyText
+  name: "Archive One"
 
 two:
   owner: two
-  name: MyString
-  description: MyText
+  name: "Archive Two"
+  description: "This is a test archive"
