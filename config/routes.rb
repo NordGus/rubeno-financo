@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: [ :new, :create, :edit, :update ]
 
   namespace :app do
-    resources :archives do
+    resources :archives, only: [ :index, :new, :create, :edit, :update, :destroy ] do
       post :access, on: :member
     end
   end
