@@ -1,5 +1,5 @@
 class Session < ApplicationRecord
-  MAX_LIFESPAN = 60.hours
+  MAX_LIFESPAN = 6.hours
 
   has_secure_token :token, length: 64
 
