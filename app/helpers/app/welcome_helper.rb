@@ -1,0 +1,2 @@
+module App::WelcomeHelper
+end
