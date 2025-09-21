@@ -40,4 +40,8 @@ class Archive < ApplicationRecord
     # TODO: This is super inefficient, I have to find a more performant way that relies less on hammering the database.
     access_keys.active.owned_by(character_id).exists?
   end
+
+  def is_accessible_by(character_id)
+    can_configure?(character_id) || can_edit?(character_id) || can_access?(character_id)
+  end
 end
