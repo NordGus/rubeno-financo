@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  character: one
-  keyable: one
+protagonist_password_padlock:
+  character: protagonist
+  keyable_type: "PasswordKey"
+  keyable: protagonist_password_key
 
-two:
-  character: two
-  keyable: two
+right_hand_password_padlock:
+  character: right_hand
+  keyable_type: "PasswordKey"
+  keyable: right_hand_password_key
