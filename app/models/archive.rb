@@ -1,7 +1,9 @@
 class Archive < ApplicationRecord
   belongs_to :owner, class_name: "Character", foreign_key: :owner_id
   has_many :sessions, dependent: :nullify, foreign_key: :archive_id
-  has_many :access_keys, class_name: "Archive::AccessKey", dependent: :destroy
+  has_many :access_keys, class_name: "Archive::AccessKey", dependent: :destroy, inverse_of: :archive
+
+  accepts_nested_attributes_for :access_keys, reject_if: ->(attributes) { attributes["owner_id"].blank? }, allow_destroy: true
 
   default_scope { includes(:access_keys, :owner) }
 
@@ -20,9 +22,8 @@ class Archive < ApplicationRecord
   scope :editable_by, ->(character_id) do
     owned_by(character_id)
       .accessible_by(character_id)
-      .where.not(access_keys: { can_edit_since: nil })
+      .where(access_keys: { can_edit: true })
   end
-  scope :configurable_by, ->(character_id) { owned_by(character_id) }
 
   validates :name, presence: true, length: { maximum: 256 }
   validates :description, length: { maximum: 1_000 }

@@ -1,7 +1,8 @@
-class App::ArchivesController < AppController
+class ArchivesController < AppController
   allow_out_of_archive_access
 
   before_action :set_archive, only: %i[ edit update destroy ]
+  before_action :set_characters, only: %i[ edit new ]
 
   # GET /app/archives or /app/archives.json
   def index
@@ -10,17 +11,11 @@ class App::ArchivesController < AppController
 
   # GET /app/archives/new
   def new
-    @archive = App::ArchiveSchema.new
+    @archive = Archive.new
   end
 
   # GET /app/archives/1/edit
   def edit
-    @archive = App::ArchiveSchema.new(
-      id: @archive.id,
-      name: @archive.name,
-      description: @archive.description,
-      owner: @archive.owner
-    )
   end
 
   # POST /app/archives or /app/archives.json
@@ -56,7 +51,7 @@ class App::ArchivesController < AppController
     @archive.destroy!
 
     respond_to do |format|
-      format.html { redirect_to app_archives_url, notice: "Archive was successfully destroyed.", status: :see_other }
+      format.html { redirect_to archives_url, notice: "Archive was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
   end
@@ -71,6 +66,10 @@ class App::ArchivesController < AppController
   private
     def set_archive
       @archive = Current.character.archives.find(params.expect(:id))
+    end
+
+    def set_characters
+      @characters = Character.where.not(id: Current.character.id)
     end
 
     def archive_params

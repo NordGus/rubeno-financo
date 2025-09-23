@@ -4,5 +4,5 @@ class Archive::AccessKey < ApplicationRecord
 
   scope :owned_by, ->(character_id) { where(owner_id: character_id) }
   scope :active, -> { where("expires_at >= ?", Time.zone.now).or(where(expires_at: nil)) }
-  scope :with_editable_access, -> { where.not(can_edit_since: nil) }
+  scope :with_editable_access, -> { where(can_edit: true) }
 end

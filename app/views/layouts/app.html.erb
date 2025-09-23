@@ -26,7 +26,7 @@
     <%= link_to "Close Session", session_path, data: { turbo_method: :delete } %>
 
     <% if params[:controller] != "app/archives" %>
-      <%= link_to "Change Archive", app_archives_url %>
+      <%= link_to "Change Archive", archives_url %>
     <% end %>
 
     <%= yield %>

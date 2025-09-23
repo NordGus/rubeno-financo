@@ -7,11 +7,8 @@ Rails.application.routes.draw do
 
   resource :session
   resources :passwords, param: :token, only: [ :new, :create, :edit, :update ]
-
-  namespace :app do
-    resources :archives, only: [ :index, :new, :create, :edit, :update, :destroy ] do
-      post :access, on: :member
-    end
+  resources :archives, only: [ :index, :new, :create, :edit, :update, :destroy ] do
+    post :access, on: :member
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

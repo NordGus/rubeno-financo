@@ -6,6 +6,7 @@ class ApplicationSchema
   include ActiveModel::SecurePassword
   include ActiveModel::Callbacks
   include ActiveModel::Attributes::Normalization
+  include ActiveModel::Serialization
 
   def new_record?
     !id&.present?

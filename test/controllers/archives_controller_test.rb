@@ -1,6 +1,6 @@
 require "test_helper"
 
-class App::ArchivesControllerTest < ActionDispatch::IntegrationTest
+class ArchivesControllerTest < ActionDispatch::IntegrationTest
   # setup do
   #   @app_archive = archives(:one)
   # end

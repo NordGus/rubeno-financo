@@ -1,0 +1,9 @@
+<% content_for :title, "Editing archive" %>
+
+<h1>Editing archive</h1>
+
+<%= render "form", archive: @archive, characters: @characters %>
+
+<div>
+  <%= link_to "Back to archives", archives_path %>
+</div>
