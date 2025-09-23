@@ -23,6 +23,7 @@
       <h4>Access Keys</h4>
       <div>
         <%= form.fields_for :access_keys do |access_key_form| %>
+          <%= access_key_form.hidden_field :id %>
           <div>
             <%= access_key_form.label :owner_id %>
             <%=

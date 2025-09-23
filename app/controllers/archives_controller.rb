@@ -73,6 +73,16 @@ class ArchivesController < AppController
     end
 
     def archive_params
-      params.require(:archive).permit(:name, :description)
+      params.require(:archive).permit(
+        :name,
+        :description,
+        access_keys_attributes: [
+          :id,
+          :owner_id,
+          :can_edit,
+          :expires_at,
+          :_destroy
+        ]
+      )
     end
 end
