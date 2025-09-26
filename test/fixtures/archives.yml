@@ -1,11 +1,20 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  owner: one
-  name: MyString
-  description: MyText
+protagonist_archive:
+  owner: protagonist
+  name: "protagonist's archive"
 
-two:
-  owner: two
-  name: MyString
-  description: MyText
+right_hand_archive:
+  owner: right_hand
+  name: "right hand's archive"
+  description: "This is a test archive"
+
+protagonist_manga_flipping_side_hustle_archive:
+  owner: protagonist
+  name: "Manga Flipping Side-Hustle"
+  description: "My Secret otaku side-hustle"
+
+protagonist_shared_family_archive:
+  owner: protagonist
+  name: "Family Shared Finances"
+  description: "What happens in Amazon Lily stays in Amazon Lily"

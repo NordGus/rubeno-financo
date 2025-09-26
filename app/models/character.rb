@@ -1,6 +1,4 @@
 class Character < ApplicationRecord
-  includes EmailValidator
-
   validates :email_address, uniqueness: true, presence: true, email: true
   validates :tag, uniqueness: true, presence: true, length: { maximum: 256 }
 

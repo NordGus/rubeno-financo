@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  owner: one
-  archive: one
-  expires_at: 2025-09-14 12:27:35
-  can_edit_since: 2025-09-14 12:27:35
+protagonist_access_key_to_right_hand_archive:
+  owner: protagonist
+  archive: right_hand_archive
+  expires_at: nil
+  can_edit: false
 
-two:
-  owner: two
-  archive: two
-  expires_at: 2025-09-14 12:27:35
-  can_edit_since: 2025-09-14 12:27:35
+right_hand_access_key_to_protagonist_archive:
+  owner: right_hand
+  archive: protagonist_archive
+  expires_at: nil
+  can_edit: true
+
+right_hand_access_key_to_protagonist_manga_flipping_side_hustle_archive:
+  owner: right_hand
+  archive: protagonist_manga_flipping_side_hustle_archive
+  expires_at: <%= Time.zone.now - 1.hour %>
+  can_edit: true
