@@ -1,19 +1,33 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-protagonist_access_key_to_right_hand_archive:
-  owner: protagonist
-  archive: right_hand_archive
-  expires_at: nil
-  can_edit: false
+# protagonist_archive keys
 
 right_hand_access_key_to_protagonist_archive:
   owner: right_hand
   archive: protagonist_archive
-  expires_at: nil
+  can_view: true
   can_edit: true
+
+# right_hand_archive keys
+
+protagonist_access_key_to_right_hand_archive:
+  owner: protagonist
+  archive: right_hand_archive
+  can_view: true
+  can_edit: false
+
+# protagonist_manga_flipping_side_hustle_archive keys
 
 right_hand_access_key_to_protagonist_manga_flipping_side_hustle_archive:
   owner: right_hand
   archive: protagonist_manga_flipping_side_hustle_archive
-  expires_at: <%= Time.zone.now - 1.hour %>
+  can_view: true
   can_edit: true
+
+# protagonist_shared_family_archive keys
+
+right_hand_access_key_to_protagonist_shared_family_archive:
+  owner: right_hand
+  archive: protagonist_shared_family_archive
+  can_view: false
+  can_edit: false
