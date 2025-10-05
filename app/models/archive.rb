@@ -3,11 +3,12 @@ class Archive < ApplicationRecord
   has_many :sessions, dependent: :nullify, foreign_key: :archive_id
   has_many :access_keys, class_name: "Archive::AccessKey", dependent: :destroy, inverse_of: :archive
 
-  accepts_nested_attributes_for :access_keys, reject_if: ->(attributes) { attributes["owner_id"].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :access_keys, reject_if: ->(attributes) { attributes["owner_id"].blank? }, allow_destroy: false
 
   default_scope { includes(:access_keys, :owner) }
 
   scope :owned_by, ->(character_id) { where(owner_id: character_id) }
+
   scope :accessible_by, ->(character_id) do
     owned_by(character_id).or(
       where(access_keys: { owner_id: character_id, can_view: true })
@@ -16,6 +17,7 @@ class Archive < ApplicationRecord
         )
       )
   end
+
   scope :editable_by, ->(character_id) do
     owned_by(character_id)
       .accessible_by(character_id)

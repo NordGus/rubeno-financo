@@ -5,4 +5,6 @@ class Archive::AccessKey < ApplicationRecord
   scope :owned_by, ->(character_id) { where(owner_id: character_id) }
   scope :active, -> { where(can_view: true).or(where(can_edit: true)) }
   scope :with_editable_access, -> { where(can_edit: true) }
+
+  validates_presence_of :can_view, :can_edit
 end
