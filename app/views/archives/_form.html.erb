@@ -19,49 +19,31 @@
       <% end %>
     </div>
 
-    <% if characters.any? %>
-      <h4>Access Keys</h4>
-      <div>
-        <%= form.fields_for :access_keys do |access_key_form| %>
-          <%= access_key_form.hidden_field :id %>
-          <div>
-            <%= access_key_form.label :owner_id %>
-            <%=
-              access_key_form.select :owner_id,
-                                     options_from_collection_for_select(characters, 'id', 'tag', access_key_form.object.owner_id),
-                                     include_blank: true
-            %>
-            <% if (errors = access_key_form.object.errors.where(:owner_id)) %>
-              <% errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
+    <h3>Access Keys</h3>
+
+    <%= form.fields_for :access_keys do |access_key_form| %>
+      <div id="<%= dom_id(access_key_form.object, access_key_form.object.owner) %>">
+        <%= access_key_form.hidden_field :id %>
+        <%= access_key_form.hidden_field :owner_id %>
+        <div><%= access_key_form.object.owner.tag %></div>
+        <div>
+          <%= access_key_form.label :can_view %>
+          <%= access_key_form.checkbox :can_view %>
+          <% if (errors = access_key_form.object.errors.where(:can_view)) %>
+            <% errors.each do |error| %>
+              <li><%= error.full_message %></li>
             <% end %>
-          </div>
-          <div>
-            <%= access_key_form.label :can_edit %>
-            <%= access_key_form.checkbox :can_edit %>
-            <% if (errors = access_key_form.object.errors.where(:can_edit)) %>
-              <% errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            <% end %>
-          </div>
-          <div>
-            <%= access_key_form.label :expires_at %>
-            <%= access_key_form.date_field :expires_at %>
-            <% if (errors = access_key_form.object.errors.where(:expires_at)) %>
-              <% errors.each do |error| %>
-                <li><%= error.full_message %></li>
-              <% end %>
-            <% end %>
-          </div>
-          <% unless access_key_form.object.new_record? %>
-            <div>
-              <%= access_key_form.label :delete %>
-              <%= access_key_form.checkbox :_destroy %>
-            </div>
           <% end %>
-        <% end %>
+        </div>
+        <div>
+          <%= access_key_form.label :can_edit %>
+          <%= access_key_form.checkbox :can_edit %>
+          <% if (errors = access_key_form.object.errors.where(:can_edit)) %>
+            <% errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     <% end %>
 
