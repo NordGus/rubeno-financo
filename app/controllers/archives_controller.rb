@@ -12,6 +12,7 @@ class ArchivesController < AppController
   # GET /app/archives/new
   def new
     @archive = Archive.new
+    @archive.access_keys.build(@characters.map { |character| { owner_id: character.id, owner: character } })
   end
 
   # GET /app/archives/1/edit
@@ -76,13 +77,7 @@ class ArchivesController < AppController
       params.require(:archive).permit(
         :name,
         :description,
-        access_keys_attributes: [
-          :id,
-          :owner_id,
-          :can_edit,
-          :expires_at,
-          :_destroy
-        ]
+        access_keys_attributes: [ :id, :owner_id, :can_view, :can_edit ]
       )
     end
 end

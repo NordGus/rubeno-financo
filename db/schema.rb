@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_09_23_175607) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_05_211145) do
   create_table "archive_access_keys", force: :cascade do |t|
     t.integer "archive_id", null: false
     t.boolean "can_edit", default: false, null: false
+    t.boolean "can_view", default: false, null: false
     t.datetime "created_at", null: false
-    t.datetime "expires_at"
     t.integer "owner_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["archive_id", "owner_id"], name: "single_owner_key_per_archive_constraint_idx", unique: true
     t.index ["archive_id"], name: "index_archive_access_keys_on_archive_id"
     t.index ["can_edit"], name: "archive_access_keys_can_edit_idx"
-    t.index ["expires_at"], name: "archive_access_key_expires_at_idx"
+    t.index ["can_view"], name: "archive_access_key_can_view_idx"
     t.index ["owner_id"], name: "index_archive_access_keys_on_owner_id"
   end
 

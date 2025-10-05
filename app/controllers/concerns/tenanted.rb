@@ -26,7 +26,7 @@ module Tenanted
   # We need to validate that current character has access to the current archive, if not we clear the archive from the current
   # session and redirected them to select an archive to operate with.
   def enforce_tenant
-    unless Current.archive.is_accessible_by(Current.character.id)
+    unless Current.archive.is_accessible_by?(Current.character.id)
       redirect_to archives_url if Current.session.update!(archive_id: nil)
     end
   end
