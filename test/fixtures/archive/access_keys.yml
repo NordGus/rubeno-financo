@@ -6,7 +6,7 @@ right_hand_access_key_to_protagonist_archive:
   owner: right_hand
   archive: protagonist_archive
   can_view: true
-  can_edit: true
+  can_edit: false
 
 # right_hand_archive keys
 
