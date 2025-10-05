@@ -1,6 +1,8 @@
 class Archive::AccessKey::CreateMissingKeysForCharacterJob < ApplicationJob
   queue_as :default
 
+  retry_on ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique, ActiveRecord::RecordNotSaved
+
   def perform(character)
     character_id = character.id
 
