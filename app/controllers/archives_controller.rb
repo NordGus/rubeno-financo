@@ -11,7 +11,7 @@ class ArchivesController < AppController
 
   # GET /app/archives/new
   def new
-    @archive = Archive.new
+    @archive = Current.character.archives.build
     @archive.access_keys.build(@characters.map { |character| { owner_id: character.id, owner: character } })
   end
 
@@ -21,11 +21,11 @@ class ArchivesController < AppController
 
   # POST /app/archives or /app/archives.json
   def create
-    @archive = Archive.new(archive_params)
+    @archive = Current.character.archives.build(archive_params)
 
     respond_to do |format|
       if @archive.save
-        format.html { redirect_to @archive, notice: "Archive was successfully created." }
+        format.html { redirect_to edit_archive_url(@archive), notice: "Archive was successfully created." }
         format.json { render :show, status: :created, location: @archive }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class ArchivesController < AppController
   def update
     respond_to do |format|
       if @archive.update(archive_params)
-        format.html { redirect_to @archive, notice: "Archive was successfully updated.", status: :see_other }
+        format.html { redirect_to edit_archive_url(@archive), notice: "Archive was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @archive }
       else
         format.html { render :edit, status: :unprocessable_entity }
