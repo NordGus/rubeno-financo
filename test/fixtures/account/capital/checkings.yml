@@ -1,25 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 protagonist_archive_checking_account:
+  type: <%= Account::Capital::Checking.name %>
   name: "Meat funds"
   description: "The allowance Nami gives me for meat"
   currency: <%= Account.currencies[:usd] %>
   archive: protagonist_archive
 
-protagonist_archive_treasure_account:
-  name: "Treasure"
-  description: "The treasure I find on the islands"
-  currency: <%= Account.currencies[:usd] %>
-  archive: protagonist_archive
-
 protagonist_shared_family_archive_checking_account:
+  type: <%= Account::Capital::Checking.name %>
   name: "Hancock's Account"
   description: "The Account that Hancock gave me access without a reason"
-  currency: <%= Account.currencies[:eur] %>
-  archive: protagonist_shared_family_archive
-
-protagonist_shared_family_archive_treasure_account:
-  name: "My Amazon Lily Stash"
-  description: "Some small treasure to help them fix the damages I caused"
   currency: <%= Account.currencies[:eur] %>
   archive: protagonist_shared_family_archive
