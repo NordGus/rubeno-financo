@@ -5,7 +5,7 @@ class CreateAccounts < ActiveRecord::Migration[8.1]
       t.string :name, null: false
       t.text :description
       t.string :currency, null: false, default: "multi", index: { name: :accounts_currency_idx }
-      t.belongs_to :parent, null: true, foreign_key: true
+      t.belongs_to :parent, null: true, foreign_key: { to_table: :accounts }
       t.belongs_to :archive, null: false, foreign_key: true
 
       t.timestamps

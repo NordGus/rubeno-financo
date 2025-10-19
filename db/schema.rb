@@ -89,8 +89,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_10_224209) do
     t.index ["token"], name: "sessions_token_uniqueness_idx", unique: true
   end
 
+  add_foreign_key "accounts", "accounts", column: "parent_id"
   add_foreign_key "accounts", "archives"
-  add_foreign_key "accounts", "parents"
   add_foreign_key "archive_access_keys", "archives"
   add_foreign_key "archive_access_keys", "characters", column: "owner_id"
   add_foreign_key "archives", "characters", column: "owner_id"
