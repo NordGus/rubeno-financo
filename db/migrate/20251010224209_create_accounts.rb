@@ -4,7 +4,7 @@ class CreateAccounts < ActiveRecord::Migration[8.1]
       t.string :type, index: { name: :accounts_type_idx, null: false }
       t.string :name, null: false
       t.text :description
-      t.string :currency, null: false
+      t.string :currency, null: false, default: "multi", index: { name: :accounts_currency_idx }
       t.belongs_to :parent, null: true, foreign_key: true
       t.belongs_to :archive, null: false, foreign_key: true
 

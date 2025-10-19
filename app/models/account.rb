@@ -8,6 +8,8 @@ class Account < ApplicationRecord
 
   validate :parent_is_not_account_system_history
 
+  enum :currency, %w[ multi usd eur gbp ].index_by(&:itself), prefix: :operates_in
+
   private
 
   def parent_is_not_account_system_history
