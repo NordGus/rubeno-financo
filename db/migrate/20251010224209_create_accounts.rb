@@ -1,7 +1,7 @@
 class CreateAccounts < ActiveRecord::Migration[8.1]
   def change
     create_table :accounts do |t|
-      t.string :type, index: { name: :accounts_type_idx, null: false }
+      t.string :type, null: false, index: { name: :accounts_type_idx }
       t.string :name, null: false
       t.text :description
       t.string :currency, null: false, default: "multi", index: { name: :accounts_currency_idx }

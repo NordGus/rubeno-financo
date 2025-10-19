@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_05_211145) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_10_224209) do
+  create_table "accounts", force: :cascade do |t|
+    t.integer "archive_id", null: false
+    t.datetime "created_at", null: false
+    t.string "currency", default: "multi", null: false
+    t.text "description"
+    t.string "name", null: false
+    t.integer "parent_id"
+    t.string "type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archive_id"], name: "index_accounts_on_archive_id"
+    t.index ["currency"], name: "accounts_currency_idx"
+    t.index ["parent_id"], name: "index_accounts_on_parent_id"
+    t.index ["type"], name: "accounts_type_idx"
+  end
+
   create_table "archive_access_keys", force: :cascade do |t|
     t.integer "archive_id", null: false
     t.boolean "can_edit", default: false, null: false
@@ -74,6 +89,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_05_211145) do
     t.index ["token"], name: "sessions_token_uniqueness_idx", unique: true
   end
 
+  add_foreign_key "accounts", "archives"
+  add_foreign_key "accounts", "parents"
   add_foreign_key "archive_access_keys", "archives"
   add_foreign_key "archive_access_keys", "characters", column: "owner_id"
   add_foreign_key "archives", "characters", column: "owner_id"

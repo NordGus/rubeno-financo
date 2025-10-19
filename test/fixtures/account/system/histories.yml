@@ -1,11 +1,29 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+protagonist_archive_checking_account_history:
+  name: <%= Account::System::History::FIXED_NAME %>
+  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  currency: <%= Account.currencies[:usd] %>
+  archive: protagonist_archive
+  parent: protagonist_archive_checking_account
+
+protagonist_archive_treasure_account_history:
+  name: <%= Account::System::History::FIXED_NAME %>
+  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  currency: <%= Account.currencies[:usd] %>
+  archive: protagonist_archive
+  parent: protagonist_archive_treasure_account
+
+protagonist_shared_family_archive_checking_account_history:
+  name: <%= Account::System::History::FIXED_NAME %>
+  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  currency: <%= Account.currencies[:eur] %>
+  archive: protagonist_shared_family_archive
+  parent: protagonist_shared_family_archive_checking_account
+
+protagonist_shared_family_archive_treasure_account_history:
+  name: <%= Account::System::History::FIXED_NAME %>
+  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  currency: <%= Account.currencies[:eur] %>
+  archive: protagonist_shared_family_archive
+  parent: protagonist_shared_family_archive_treasure_account
