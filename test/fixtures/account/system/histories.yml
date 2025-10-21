@@ -1,33 +1,59 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+<%
+  account_type = Account::System::History.name
+  account_name = Account::System::History::FIXED_NAME
+  account_description = Account::System::History::FIXED_DESCRIPTION
+%>
+
+## Protagonist's archive accounts
+
 protagonist_archive_checking_account_history:
-  type: <%= Account::System::History.name %>
-  name: <%= Account::System::History::FIXED_NAME %>
-  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
   currency: <%= Account.currencies[:usd] %>
   archive: protagonist_archive
   parent: protagonist_archive_checking_account
 
 protagonist_archive_treasure_account_history:
-  type: <%= Account::System::History.name %>
-  name: <%= Account::System::History::FIXED_NAME %>
-  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
   currency: <%= Account.currencies[:usd] %>
   archive: protagonist_archive
   parent: protagonist_archive_treasure_account
 
+protagonist_archive_sunny_repairs_loan_history:
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
+  currency: <%= Account.currencies[:usd] %>
+  archive: protagonist_archive
+  parent: protagonist_archive_sunny_repairs_loan
+
+## Family Shared Finances accounts
+
 protagonist_shared_family_archive_checking_account_history:
-  type: <%= Account::System::History.name %>
-  name: <%= Account::System::History::FIXED_NAME %>
-  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
   currency: <%= Account.currencies[:eur] %>
   archive: protagonist_shared_family_archive
   parent: protagonist_shared_family_archive_checking_account
 
 protagonist_shared_family_archive_treasure_account_history:
-  type: <%= Account::System::History.name %>
-  name: <%= Account::System::History::FIXED_NAME %>
-  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
   currency: <%= Account.currencies[:eur] %>
   archive: protagonist_shared_family_archive
   parent: protagonist_shared_family_archive_treasure_account
+
+protagonist_shared_family_archive_palace_repairs_loan_history:
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
+  currency: <%= Account.currencies[:eur] %>
+  archive: protagonist_shared_family_archive
+  parent: protagonist_shared_family_archive_palace_repairs_loan
