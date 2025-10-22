@@ -32,6 +32,14 @@ protagonist_archive_sunny_repairs_loan_history:
   archive: protagonist_archive
   parent: protagonist_archive_sunny_repairs_loan
 
+protagonist_archive_wano_kuni_credit_line_history:
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
+  currency: <%= Account.currencies[:usd] %>
+  archive: protagonist_archive
+  parent: protagonist_archive_wano_kuni_credit_line
+
 ## Family Shared Finances accounts
 
 protagonist_shared_family_archive_checking_account_history:
@@ -57,3 +65,11 @@ protagonist_shared_family_archive_palace_repairs_loan_history:
   currency: <%= Account.currencies[:eur] %>
   archive: protagonist_shared_family_archive
   parent: protagonist_shared_family_archive_palace_repairs_loan
+
+protagonist_shared_family_archive_hancock_credit_card_history:
+  type: <%= account_type %>
+  name: <%= account_name %>
+  description: <%= account_description %>
+  currency: <%= Account.currencies[:eur] %>
+  archive: protagonist_shared_family_archive
+  parent: protagonist_shared_family_archive_hancock_credit_card
