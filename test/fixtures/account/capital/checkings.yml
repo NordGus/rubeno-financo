@@ -1,16 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-<% account_type = Account::Capital::Checking.name %>
+DEFAULTS: &DEFAULTS
+  type: <%= Account::Capital::Checking.name %>
 
 protagonist_archive_checking_account:
-  type: <%= account_type %>
+  <<: *DEFAULTS
   name: "Meat funds"
   description: "The allowance Nami gives me for meat"
   currency: <%= Account.currencies[:usd] %>
   archive: protagonist_archive
 
 protagonist_shared_family_archive_checking_account:
-  type: <%= account_type %>
+  <<: *DEFAULTS
   name: "Hancock's Account"
   description: "The Account that Hancock gave me access without a reason"
   currency: <%= Account.currencies[:eur] %>

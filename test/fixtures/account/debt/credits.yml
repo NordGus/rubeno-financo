@@ -1,15 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-<% account_type = Account::Debt::Credit.name %>
+DEFAULTS: &DEFAULTS
+  type: <%= Account::Capital::Checking.name %>
 
 protagonist_archive_wano_kuni_credit_line:
-  type: <%= account_type %>
+  <<: *DEFAULTS
   name: "Momo's Shogunate's Credit Guarantee Letter"
   currency: <%= Account.currencies[:usd] %>
   archive: protagonist_archive
 
 protagonist_shared_family_archive_hancock_credit_card:
-  type: <%= account_type %>
+  <<: *DEFAULTS
   name: "Hancock's Credit Line"
   description: "Hancock gave me this card and told me I can use it"
   currency: <%= Account.currencies[:eur] %>
