@@ -8,5 +8,17 @@ module Account::IsNonCategory
 
   included do
     enum :currency, %w[ usd eur gbp ].index_by(&:itself), prefix: :operates_in
+
+    validate :child_has_the_same_currency_as_parent
+  end
+
+  class_methods do
+    private
+
+    def children_has_the_same_currency_as_parent
+      return unless parent.present?
+
+      errors.add(:currency, "must match parent currency") unless parent.currency == currency
+    end
   end
 end
