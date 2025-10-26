@@ -1,0 +1,30 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+DEFAULTS: &DEFAULTS
+  type: <%= Account::Category::Income.name %>
+  currency: <%= Account.currencies[:multi] %>
+
+protagonist_archive_donations_income:
+  <<: *DEFAULTS
+  name: "Donations"
+  description: "Donations that people gives us for helping them"
+  archive: protagonist_archive
+
+protagonist_archive_bounty_income:
+  <<: *DEFAULTS
+  name: "Bounties"
+  description: "Bounties we receive from giving criminals to the islands we help"
+  archive: protagonist_archive
+
+protagonist_archive_treasure_income:
+  <<: *DEFAULTS
+  name: "Treasure"
+  description: "Treasure we find on our travels"
+  archive: protagonist_archive
+
+protagonist_archive_treasure_booty_income:
+  <<: *DEFAULTS
+  name: "Booty"
+  description: "Treasure take from our enemies"
+  archive: protagonist_archive
+  parent: protagonist_archive_treasure_income
