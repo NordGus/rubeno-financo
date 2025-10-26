@@ -1,0 +1,63 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+DEFAULTS: &DEFAULTS
+  type: <%= Account::Category::Expense.name %>
+  currency: <%= Account.currencies[:multi] %>
+
+protagonist_archive_ship_expense:
+  <<: *DEFAULTS
+  name: "Ship"
+  description: "My Ship's expenses"
+  archive: protagonist_archive
+
+protagonist_archive_ship_port_expense:
+  <<: *DEFAULTS
+  name: "Port"
+  description: "Port fees"
+  archive: protagonist_archive
+  parent: protagonist_archive_ship_expense
+
+protagonist_archive_ship_cargo_expense:
+  <<: *DEFAULTS
+  name: "Repair Materials"
+  archive: protagonist_archive
+  parent: protagonist_archive_ship_expense
+
+protagonist_archive_ship_soda_expense:
+  <<: *DEFAULTS
+  name: "Soda"
+  description: "Soda for the Sunny's systems"
+  archive: protagonist_archive
+  parent: protagonist_archive_ship_expense
+
+protagonist_archive_groceries_expense:
+  <<: *DEFAULTS
+  name: "Groceries"
+  archive: protagonist_archive
+
+protagonist_archive_groceries_food_expense:
+  <<: *DEFAULTS
+  name: "Food"
+  description: "Ingredients for Sanji and meat for me"
+  archive: protagonist_archive
+  parent: protagonist_archive_groceries_expense
+
+protagonist_archive_groceries_drinks_expense:
+  <<: *DEFAULTS
+  name: "Drinks"
+  description: "Sake, Beer, Soda and Tea"
+  archive: protagonist_archive
+  parent: protagonist_archive_groceries_expense
+
+protagonist_archive_groceries_deserts_expense:
+  <<: *DEFAULTS
+  name: "Deserts"
+  description: "Ice Cream and Sweets for Chopper"
+  archive: protagonist_archive
+  parent: protagonist_archive_groceries_expense
+
+protagonist_archive_transportation_expense:
+  <<: *DEFAULTS
+  name: "Transportation"
+  description: "In island transportation expenses"
+  archive: protagonist_archive
