@@ -14,6 +14,12 @@ class Account < ApplicationRecord
 
   validate :parent_is_not_account_system_history
 
+  def full_name
+    return name unless parent_id.present?
+
+    "#{parent.name} (#{name})"
+  end
+
   private
 
   def parent_is_not_account_system_history
