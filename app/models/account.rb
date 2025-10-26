@@ -6,9 +6,13 @@ class Account < ApplicationRecord
 
   has_many :children, class_name: "Account", foreign_key: :parent_id, dependent: :destroy
 
-  validate :parent_is_not_account_system_history
-
   enum :currency, %w[ multi usd eur gbp ].index_by(&:itself), prefix: :operates_in
+
+  default_scope { includes(:parent, children: :parent) }
+  scope :active, -> { where(archived: false) }
+  scope :archived, -> { where(archived: true) }
+
+  validate :parent_is_not_account_system_history
 
   private
 

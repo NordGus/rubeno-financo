@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_10_224209) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_23_153903) do
   create_table "accounts", force: :cascade do |t|
     t.integer "archive_id", null: false
+    t.boolean "archived", default: false, null: false
     t.datetime "created_at", null: false
     t.string "currency", default: "multi", null: false
     t.text "description"
@@ -21,6 +22,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_10_224209) do
     t.string "type", null: false
     t.datetime "updated_at", null: false
     t.index ["archive_id"], name: "index_accounts_on_archive_id"
+    t.index ["archived"], name: "accounts_archived_idx"
     t.index ["currency"], name: "accounts_currency_idx"
     t.index ["parent_id"], name: "index_accounts_on_parent_id"
     t.index ["type"], name: "accounts_type_idx"
