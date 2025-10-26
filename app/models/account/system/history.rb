@@ -4,7 +4,7 @@
 # Account::System::History is an account used to represent the balance of the parent account at a certain date, this is
 # one is used to include it on the archive's ledger(s).
 class Account::System::History < Account
-  include Account::NonCategory
+  include Account::IsNonCategory
 
   FIXED_NAME = "History"
   # This string is written this way to separated into multiple lines while being stored as a contiguous string by
