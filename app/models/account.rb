@@ -8,9 +8,10 @@ class Account < ApplicationRecord
 
   enum :currency, %w[ multi usd eur gbp ].index_by(&:itself), prefix: :operates_in
 
-  default_scope { includes(:parent, children: :parent) }
   scope :active, -> { where(archived: false) }
   scope :archived, -> { where(archived: true) }
+  scope :parents_only, -> { includes(:children).where(parent_id: nil) }
+  scope :current, -> { where(archive: Current.archive) }
 
   validate :parent_is_not_account_system_history
 
