@@ -8,5 +8,7 @@ module Account::WithHistory
 
   included do
     has_one :history, class_name: "Account::System::History", foreign_key: :parent_id, dependent: :destroy
+
+    accepts_nested_attributes_for :history, allow_destroy: false
   end
 end
