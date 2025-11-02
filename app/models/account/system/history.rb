@@ -7,8 +7,7 @@ class Account::System::History < Account
   include Account::IsNonCategory
 
   FIXED_NAME = "History"
-  # This string is written this way to separated into multiple lines while being stored as a contiguous string by
-  # the constant
+  # This string is written this way to separate into multiple lines while being stored as a contiguous string
   FIXED_DESCRIPTION = "DO NOT DELETE! "\
     "This is an account generated automatically by financo. "\
     "It is used for the internals of the application, "\
@@ -16,6 +15,9 @@ class Account::System::History < Account
     "DO NOT DELETE!"
 
   belongs_to :parent, class_name: "Account", foreign_key: :parent_id
+  has_one :config, class_name: "Account::Config::History", foreign_key: :account_id, dependent: :destroy
+
+  accepts_nested_attributes_for :config, allow_destroy: false, reject_if: false
 
   normalizes :name, with: ->(_name) { FIXED_NAME }, apply_to_nil: true
   normalizes :description, with: ->(_description) { FIXED_DESCRIPTION }, apply_to_nil: true

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_23_153903) do
+ActiveRecord::Schema[8.1].define(version: 2025_10_31_232709) do
+  create_table "account_config_histories", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.date "at"
+    t.decimal "balance", precision: 16, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_config_histories_on_account_id"
+  end
+
   create_table "accounts", force: :cascade do |t|
     t.integer "archive_id", null: false
     t.boolean "archived", default: false, null: false
@@ -91,6 +100,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_23_153903) do
     t.index ["token"], name: "sessions_token_uniqueness_idx", unique: true
   end
 
+  add_foreign_key "account_config_histories", "accounts"
   add_foreign_key "accounts", "accounts", column: "parent_id"
   add_foreign_key "accounts", "archives"
   add_foreign_key "archive_access_keys", "archives"
