@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_31_232709) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_05_202548) do
   create_table "account_config_histories", force: :cascade do |t|
     t.integer "account_id", null: false
     t.date "at"
@@ -25,6 +25,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_31_232709) do
     t.boolean "archived", default: false, null: false
     t.datetime "created_at", null: false
     t.string "currency", default: "multi", null: false
+    t.datetime "deleted_at"
     t.text "description"
     t.string "name", null: false
     t.integer "parent_id"
@@ -33,6 +34,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_31_232709) do
     t.index ["archive_id"], name: "index_accounts_on_archive_id"
     t.index ["archived"], name: "accounts_archived_idx"
     t.index ["currency"], name: "accounts_currency_idx"
+    t.index ["deleted_at"], name: "accounts_deleted_at_idx"
     t.index ["parent_id"], name: "index_accounts_on_parent_id"
     t.index ["type"], name: "accounts_type_idx"
   end
