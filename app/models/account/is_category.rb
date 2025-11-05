@@ -11,6 +11,8 @@ module Account::IsCategory
 
     validate :child_has_the_same_currency_as_parent
     validate :child_is_the_same_type_as_parent
+
+    accepts_nested_attributes_for :children_in_system, allow_destroy: false
   end
 
   class_methods do
