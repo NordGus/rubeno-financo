@@ -21,6 +21,25 @@ class Account < ApplicationRecord
     "#{parent.name} (#{name})"
   end
 
+  ##
+  # Soft deletes the account and all associated records that are dependent on it (as the account sits on top of the
+  # association tree). Then enqueues a background job to destroy the account and dependent records. This allows financo
+  # to quickly remove accounts or records from the UI while running the slow and heavy destroy operations in the
+  # background.
+  #
+  def soft_destroy
+    timestamp = Time.current
+    success = nil
+
+    transaction do
+      children.update_all(deleted_at: timestamp)
+      success = update!(deleted_at: timestamp)
+      Cleanup::DestroySoftDeletedRecordJob.perform_later(self)
+    end
+
+    success
+  end
+
   private
 
   def parent_is_not_account_system_history
