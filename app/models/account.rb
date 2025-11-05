@@ -4,7 +4,10 @@ class Account < ApplicationRecord
   belongs_to :archive, inverse_of: :accounts
   belongs_to :parent, optional: true, class_name: "Account", foreign_key: :parent_id
 
+  # children is the association used to build the account tree.
   has_many :children, class_name: "Account", foreign_key: :parent_id, dependent: :destroy
+  # children_in_system is the same association as children but only contains accounts that are not softly deleted.
+  has_many :children_in_system, -> { in_system }, class_name: "Account", foreign_key: :parent_id, dependent: :destroy
 
   enum :currency, %w[ multi usd eur gbp ].index_by(&:itself), prefix: :operates_in
 
@@ -12,6 +15,8 @@ class Account < ApplicationRecord
   scope :archived, -> { where(archived: true) }
   scope :parents_only, -> { includes(:children).where(parent_id: nil) }
   scope :current, -> { where(archive: Current.archive) }
+  # in_system is a scope that only returns accounts that are not softly deleted.
+  scope :in_system, -> { where(deleted_at: nil) }
 
   validate :parent_is_not_account_system_history
 
