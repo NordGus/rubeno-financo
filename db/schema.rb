@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_05_202548) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_06_220741) do
   create_table "account_config_histories", force: :cascade do |t|
     t.integer "account_id", null: false
     t.date "at"
@@ -102,6 +102,30 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_05_202548) do
     t.index ["token"], name: "sessions_token_uniqueness_idx", unique: true
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer "archive_id", null: false
+    t.datetime "created_at", null: false
+    t.string "currency", null: false
+    t.datetime "deleted_at"
+    t.date "executed_at"
+    t.decimal "from_amount", precision: 16, scale: 2, null: false
+    t.integer "from_id", null: false
+    t.integer "from_parent_id"
+    t.date "issued_at", null: false
+    t.decimal "to_amount", precision: 16, scale: 2, null: false
+    t.integer "to_id", null: false
+    t.integer "to_parent_id"
+    t.datetime "updated_at", null: false
+    t.index ["archive_id"], name: "index_transactions_on_archive_id"
+    t.index ["deleted_at"], name: "transactions_deleted_at_index"
+    t.index ["executed_at"], name: "transactions_executed_at_idx"
+    t.index ["from_id"], name: "index_transactions_on_from_id"
+    t.index ["from_parent_id"], name: "index_transactions_on_from_parent_id"
+    t.index ["issued_at"], name: "transactions_issued_at_idx"
+    t.index ["to_id"], name: "index_transactions_on_to_id"
+    t.index ["to_parent_id"], name: "index_transactions_on_to_parent_id"
+  end
+
   add_foreign_key "account_config_histories", "accounts"
   add_foreign_key "accounts", "accounts", column: "parent_id"
   add_foreign_key "accounts", "archives"
@@ -110,4 +134,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_05_202548) do
   add_foreign_key "archives", "characters", column: "owner_id"
   add_foreign_key "padlocks", "characters"
   add_foreign_key "sessions", "characters"
+  add_foreign_key "transactions", "accounts", column: "from_id"
+  add_foreign_key "transactions", "accounts", column: "from_parent_id"
+  add_foreign_key "transactions", "accounts", column: "to_id"
+  add_foreign_key "transactions", "accounts", column: "to_parent_id"
+  add_foreign_key "transactions", "archives"
 end

@@ -9,6 +9,19 @@ class Account < ApplicationRecord
   # children_in_system is the same association as children but only contains accounts that are not softly deleted.
   has_many :children_in_system, -> { in_system }, class_name: "Account", foreign_key: :parent_id, dependent: :destroy
 
+  has_many :credit_transactions, class_name: "Transaction", foreign_key: :to_id, inverse_of: :to, dependent: :destroy
+  has_many :debit_transactions, class_name: "Transaction", foreign_key: :from_id, inverse_of: :from, dependent: :destroy
+  has_many :child_credit_transactions, class_name: "Transaction", foreign_key: :to_parent_id, inverse_of: :to, dependent: :destroy
+  has_many :child_debit_transactions, class_name: "Transaction", foreign_key: :from_parent_id, inverse_of: :from, dependent: :destroy
+
+  def transactions
+    Transaction.where(from_id: id)
+               .or(Transaction.where(to_id: id))
+               .or(Transaction.where(from_parent_id: id))
+               .or(Transaction.where(to_parent_id: id))
+               .order(executed_at: :desc)
+  end
+
   enum :currency, %w[ multi usd eur gbp ].index_by(&:itself), prefix: :operates_in
 
   scope :active, -> { where(archived: false) }
@@ -38,6 +51,10 @@ class Account < ApplicationRecord
 
     transaction do
       children.update_all(deleted_at: timestamp)
+      child_credit_transactions.update_all(deleted_at: timestamp)
+      child_debit_transactions.update_all(deleted_at: timestamp)
+      credit_transactions.update_all(deleted_at: timestamp)
+      debit_transactions.update_all(deleted_at: timestamp)
       success = update!(deleted_at: timestamp)
       Cleanup::DestroySoftDeletedRecordJob.perform_later(self)
     end
