@@ -7,7 +7,7 @@ module Account::IsCategory
   extend ActiveSupport::Concern
 
   included do
-    enum :currency, System::Currency::FOR_CATEGORIES, prefix: :operates_in
+    enum :currency, ::System::Currency::FOR_CATEGORIES, prefix: :operates_in
 
     validate :child_has_the_same_currency_as_parent
     validate :child_is_the_same_type_as_parent

@@ -38,7 +38,7 @@ class Transaction < ApplicationRecord
   scope :executed, -> { where.not(executed_at: nil).order(executed_at: :desc) }
   scope :pending, -> { where(executed_at: nil).order(issued_at: :desc) }
 
-  enum :currency, System::Currency::FOR_TRANSACTIONS, prefix: :operates_in
+  enum :currency, ::System::Currency::FOR_TRANSACTIONS, prefix: :operates_in
 
   def soft_destroy
     timestamp = Time.current
