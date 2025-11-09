@@ -1,6 +1,82 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+_fixture:
+  ignore:
+    - protagonist_archive_base_transaction
+    - protagonist_shared_family_archive_base_transaction
+
+protagonist_archive_base_transaction: &protagonist_archive_base_transaction
+  archive: protagonist_archive
+  currency: <%= Account.currencies[:usd] %>
+
+protagonist_shared_family_archive_base_transaction: &protagonist_shared_family_archive_base_transaction
+  archive: protagonist_shared_family_archive
+  currency: <%= Account.currencies[:eur] %>
+
+# History transactions
+# Protagonist's archive transactions
+
 protagonist_archive_checking_account_history_transaction:
-  account: protagonist_archive_checking_account_history
-  amount: 1000
-  description: "Initial deposit"
+  <<: *protagonist_archive_base_transaction
+  from: protagonist_archive_checking_account_history
+  to: protagonist_archive_treasure_account
+  from_amount: 1334.42
+  to_amount: 1334.42
+  issued_at: <%= Time.current - (4.months + 21.days) %>
+  execute_at: <%= Time.current - (4.months + 21.days) %>
+
+# protagonist_archive_treasure_account_history_transaction:
+#   <<: *protagonist_archive_base_transaction
+#   This account does not have history
+
+protagonist_archive_sunny_repairs_loan_history_transaction:
+  <<: *protagonist_archive_base_transaction
+  from: protagonist_archive_sunny_repairs_loan
+  to: protagonist_archive_sunny_repairs_loan_history
+  from_amount: 69420.33
+  to_amount: 69420.33
+  issued_at: <%= Time.current - (2.year + 8.months + 14.days) %>
+  execute_at: <%= Time.current - (2.year + 8.months + 14.days) %>
+
+# protagonist_archive_wano_kuni_credit_line_history_transaction:
+#   <<: *protagonist_archive_base_transaction
+#   This account does not have history
+
+# History transactions
+# Shared family transactions
+
+protagonist_shared_family_archive_checking_account_history_transaction:
+  <<: *protagonist_shared_family_archive_base_transaction
+  from: protagonist_shared_family_archive_checking_account_history
+  to: protagonist_shared_family_archive_checking_account
+  from_amount: 1337420.69
+  to_amount: 1337420.69
+  issued_at: <%= Time.current - (2.year + 4.months + 2.days) %>
+  execute_at: <%= Time.current - (2.year + 4.months + 2.days) %>
+
+protagonist_shared_family_archive_treasure_account_history_transaction:
+  <<: *protagonist_shared_family_archive_base_transaction
+  from: protagonist_shared_family_archive_treasure_account_history
+  to: protagonist_shared_family_archive_treasure_account
+  from_amount: 42069.49
+  to_amount: 42069.49
+  issued_at: <%= Time.current - (2.year + 6.months + 8.days) %>
+  execute_at: <%= Time.current - (2.year + 6.months + 8.days) %>
+
+protagonist_shared_family_archive_palace_repairs_loan_history:
+  <<: *protagonist_shared_family_archive_base_transaction
+  from: protagonist_shared_family_archive_palace_repairs_loan
+  to: protagonist_shared_family_archive_palace_repairs_loan_history
+  from_amount: 1234.33
+  to_amount: 1234.33
+  issued_at: <%= Time.current - (2.year + 6.months + 10.days) %>
+  execute_at: <%= Time.current - (2.year + 6.months + 10.days) %>
+
+protagonist_shared_family_archive_hancock_credit_card_history:
+  <<: *protagonist_shared_family_archive_base_transaction
+  from: protagonist_shared_family_archive_hancock_credit_card_history
+  to: protagonist_shared_family_archive_hancock_credit_card
+  from_amount: 100000.00
+  to_amount: 100000.00
+  issued_at: <%= Time.current - (9.months + 15.days) %>
+  execute_at: <%= Time.current - (9.months + 15.days) %>
