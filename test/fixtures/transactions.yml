@@ -1,21 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  archive: one
-  from: one
-  to: one
-  from_amount: 9.99
-  to_amount: 9.99
-  currency: MyString
-  issued_at: 2025-11-06
-  executed_at: 2025-11-06
-
-two:
-  archive: two
-  from: two
-  to: two
-  from_amount: 9.99
-  to_amount: 9.99
-  currency: MyString
-  issued_at: 2025-11-06
-  executed_at: 2025-11-06
+protagonist_archive_checking_account_history_transaction:
+  account: protagonist_archive_checking_account_history
+  amount: 1000
+  description: "Initial deposit"

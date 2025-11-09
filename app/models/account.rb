@@ -22,7 +22,7 @@ class Account < ApplicationRecord
                .order(executed_at: :desc)
   end
 
-  enum :currency, %w[ multi usd eur gbp ].index_by(&:itself), prefix: :operates_in
+  enum :currency, System::Currency::ALL, prefix: :operates_in
 
   scope :active, -> { where(archived: false) }
   scope :archived, -> { where(archived: true) }
