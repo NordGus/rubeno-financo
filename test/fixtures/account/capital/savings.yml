@@ -1,19 +1,29 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+_fixture:
+  ignore:
+    - protagonist_archive_base_savings_account
+    - protagonist_shared_family_archive_base_savings_account
 
 DEFAULTS: &DEFAULTS
   type: <%= Account::Capital::Saving.name %>
 
-protagonist_archive_treasure_account:
+protagonist_archive_base_savings_account: &protagonist_archive_base_savings_account
   <<: *DEFAULTS
+  archive: protagonist_archive
+  currency: <%= Account.currencies[:usd] %>
+
+protagonist_shared_family_archive_base_savings_account: &protagonist_shared_family_archive_base_savings_account
+  <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+  currency: <%= Account.currencies[:eur] %>
+
+protagonist_archive_treasure_account:
+  <<: *protagonist_archive_base_savings_account
   name: "Treasure"
   description: "The treasure I find on the islands"
-  currency: <%= Account.currencies[:usd] %>
-  archive: protagonist_archive
 
 protagonist_shared_family_archive_treasure_account:
-  <<: *DEFAULTS
+  <<: *protagonist_shared_family_archive_base_savings_account
   name: "My Amazon Lily Stash"
   description: "Some small treasure to help them fix the damages I caused"
-  currency: <%= Account.currencies[:eur] %>
-  archive: protagonist_shared_family_archive
