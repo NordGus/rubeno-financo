@@ -4,6 +4,8 @@ DEFAULTS: &DEFAULTS
   balance: 0.0
   at: nil
 
+# Protagonist's archive accounts'
+
 protagonist_archive_checking_account_history_config:
   <<: *DEFAULTS
   account: protagonist_archive_checking_account_history
@@ -23,6 +25,8 @@ protagonist_archive_sunny_repairs_loan_history_config:
 protagonist_archive_wano_kuni_credit_line_history_config:
   <<: *DEFAULTS
   account: protagonist_archive_wano_kuni_credit_line_history
+
+# Family Shared Finances accounts'
 
 protagonist_shared_family_archive_checking_account_history_config:
   <<: *DEFAULTS
