@@ -1,63 +1,103 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+_fixture:
+  ignore:
+    - protagonist_archive_base_expense
+    - protagonist_shared_family_archive_base_expense
+
 DEFAULTS: &DEFAULTS
   type: <%= Account::Category::Expense.name %>
   currency: <%= Account.currencies[:multi] %>
 
-protagonist_archive_ship_expense:
+protagonist_archive_base_expense: &protagonist_archive_base_expense
   <<: *DEFAULTS
-  name: "Ship"
-  description: "My Ship's expenses"
   archive: protagonist_archive
 
-protagonist_archive_ship_port_expense:
+protagonist_shared_family_archive_base_expense: &protagonist_shared_family_archive_base_expense
   <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+
+## Protagonist's archive expenses'
+
+protagonist_archive_ship_expense:
+  <<: *protagonist_archive_base_expense
+  name: "Ship"
+  description: "My Ship's expenses"
+
+protagonist_archive_ship_port_expense:
+  <<: *protagonist_archive_base_expense
   name: "Port"
   description: "Port fees"
-  archive: protagonist_archive
   parent: protagonist_archive_ship_expense
 
 protagonist_archive_ship_cargo_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Repair Materials"
-  archive: protagonist_archive
   parent: protagonist_archive_ship_expense
 
 protagonist_archive_ship_soda_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Soda"
   description: "Soda for the Sunny's systems"
-  archive: protagonist_archive
   parent: protagonist_archive_ship_expense
 
 protagonist_archive_groceries_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Groceries"
-  archive: protagonist_archive
 
 protagonist_archive_groceries_food_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Food"
   description: "Ingredients for Sanji and meat for me"
-  archive: protagonist_archive
   parent: protagonist_archive_groceries_expense
 
 protagonist_archive_groceries_drinks_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Drinks"
   description: "Sake, Beer, Soda and Tea"
-  archive: protagonist_archive
   parent: protagonist_archive_groceries_expense
 
 protagonist_archive_groceries_deserts_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Deserts"
   description: "Ice Cream and Sweets for Chopper"
-  archive: protagonist_archive
   parent: protagonist_archive_groceries_expense
 
 protagonist_archive_transportation_expense:
-  <<: *DEFAULTS
+  <<: *protagonist_archive_base_expense
   name: "Transportation"
   description: "In island transportation expenses"
-  archive: protagonist_archive
+
+## Shared Family's archive expenses'
+
+protagonist_shared_family_repairs_expense:
+  <<: *protagonist_shared_family_archive_base_expense
+  name: "Repairs"
+  description: "Repairs for the Hancock's Palace"
+
+protagonist_shared_family_roof_repairs_expense:
+  <<: *protagonist_shared_family_archive_base_expense
+  name: "Roof"
+  parent: protagonist_shared_family_repairs_expense
+
+protagonist_shared_family_security_repairs_expense:
+  <<: *protagonist_shared_family_archive_base_expense
+  name: "Security"
+  description: "Palace's security overhaul"
+  parent: protagonist_shared_family_repairs_expense
+
+protagonist_shared_family_furniture_repairs_expense:
+  <<: *protagonist_shared_family_archive_base_expense
+  name: "Furniture"
+  description: "Repairs for the Hancock's Palace's furniture or replace it"
+  parent: protagonist_shared_family_repairs_expense
+
+protagonist_shared_family_groceries_expenses:
+  <<: *protagonist_shared_family_archive_base_expense
+  name: "Food and Beverages"
+  description: "For going out with the Crew and Hancock"
+
+protagonist_shared_family_groceries_food_expense:
+  <<: *protagonist_shared_family_archive_base_expense
+  name: "Dates with Hancock"
+  parent: protagonist_shared_family_groceries_expenses
