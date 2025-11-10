@@ -1,17 +1,28 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+_fixture:
+  ignore:
+    - protagonist_archive_base_credit_line
+    - protagonist_shared_family_archive_base_credit_line
+
 DEFAULTS: &DEFAULTS
   type: <%= Account::Capital::Checking.name %>
 
-protagonist_archive_wano_kuni_credit_line:
+protagonist_archive_base_credit_line: &protagonist_archive_base_credit_line
   <<: *DEFAULTS
-  name: "Momo's Shogunate's Credit Guarantee Letter"
-  currency: <%= Account.currencies[:usd] %>
   archive: protagonist_archive
+  currency: <%= Account.currencies[:usd] %>
+
+protagonist_shared_family_archive_base_credit_line: &protagonist_shared_family_archive_base_credit_line
+  <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+  currency: <%= Account.currencies[:eur] %>
+
+protagonist_archive_wano_kuni_credit_line:
+  <<: *protagonist_archive_base_credit_line
+  name: "Momo's Shogunate's Credit Guarantee Letter"
 
 protagonist_shared_family_archive_hancock_credit_card:
-  <<: *DEFAULTS
+  <<: *protagonist_shared_family_archive_base_credit_line
   name: "Hancock's Credit Line"
   description: "Hancock gave me this card and told me I can use it"
-  currency: <%= Account.currencies[:eur] %>
-  archive: protagonist_shared_family_archive
