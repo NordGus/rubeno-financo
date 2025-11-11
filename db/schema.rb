@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_08_105253) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_10_211734) do
   create_table "account_config_histories", force: :cascade do |t|
     t.integer "account_id", null: false
     t.date "at"
@@ -109,6 +109,10 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_08_105253) do
     t.index ["email_address"], name: "characters_email_address_uniqueness_idx", unique: true
     t.index ["tag"], name: "characters_tag_uniqueness_idx", unique: true
   end
+
+# Could not dump table "file_systems" because of following StandardError
+#   Unknown type 'foreign_key_type' for column 'mountable_id'
+
 
   create_table "padlocks", force: :cascade do |t|
     t.integer "character_id", null: false
