@@ -6,7 +6,7 @@ _fixture:
     - protagonist_shared_family_archive_base_loan
 
 DEFAULTS: &DEFAULTS
-  type: <%= Account::Capital::Checking.name %>
+  type: <%= Account::Debt::Loan.name %>
 
 protagonist_archive_base_loan: &protagonist_archive_base_loan
   <<: *DEFAULTS

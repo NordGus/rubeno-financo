@@ -6,7 +6,7 @@ _fixture:
     - protagonist_shared_family_archive_base_credit_line
 
 DEFAULTS: &DEFAULTS
-  type: <%= Account::Capital::Checking.name %>
+  type: <%= Account::Debt::Credit.name %>
 
 protagonist_archive_base_credit_line: &protagonist_archive_base_credit_line
   <<: *DEFAULTS
