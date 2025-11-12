@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FileSystem::Item::File < FileSystem::Item
-  has_one_attached :file
+  has_one_attached :file, service: :local, strict_loading: true
 
   has_many :versions, class_name: "FileSystem::Item::File", as: :parentable, dependent: :destroy
 
