@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  parentable: one
+  parentable_type: Parentable
+  name: MyString
+  version: MyString
+  deleted_at: 2025-11-12 01:22:32
+  archive: one
+
+two:
+  type: 
+  parentable: two
+  parentable_type: Parentable
+  name: MyString
+  version: MyString
+  deleted_at: 2025-11-12 01:22:32
+  archive: two

@@ -29,4 +29,26 @@
 #      model can by used to build such systems.
 class FileSystem < ApplicationRecord
   belongs_to :mountable, polymorphic: true
+  belongs_to :archive
+
+  has_many :children, class_name: "FileSystem::Item", as: :parentable, dependent: :destroy
+  has_many :directories, class_name: "FileSystem::Item::Directory", as: :parentable, dependent: :destroy
+  has_many :files, class_name: "FileSystem::Item::File", as: :parentable, dependent: :destroy
+
+  default_scope { includes(:directories, files: :versions) }
+
+  def soft_destroy
+    timestamp = Time.current
+    success = nil
+
+    transaction do
+      children.update_all(deleted_at: timestamp)
+      directories.update_all(deleted_at: timestamp)
+      files.update_all(deleted_at: timestamp)
+      success = update!(deleted_at: timestamp)
+      Cleanup::DestroySoftDeletedRecordJob.perform_later(self)
+    end
+
+    success
+  end
 end
