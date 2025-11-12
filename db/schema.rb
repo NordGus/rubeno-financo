@@ -137,7 +137,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_002232) do
     t.datetime "updated_at", null: false
     t.index ["archive_id"], name: "index_file_systems_on_archive_id"
     t.index ["deleted_at"], name: "file_system_deleted_at_index"
-    t.index ["mountable_type", "mountable_id"], name: "file_systems_mountable_index"
+    t.index ["mountable_type", "mountable_id"], name: "file_systems_mountable_index", unique: true
   end
 
   create_table "padlocks", force: :cascade do |t|

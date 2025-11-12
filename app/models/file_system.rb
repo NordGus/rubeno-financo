@@ -37,6 +37,11 @@ class FileSystem < ApplicationRecord
 
   default_scope { includes(:directories, files: :versions) }
 
+  # Account::System::History does not mount a file system because is an internal/implementation detail of financo's
+  # system. Meaning the user should not manage any aspect of it themselves.
+  validates :mountable_type, exclusion: { in: [ Account::System::History.name ] }
+  validates :mountable, presence: true, uniqueness: true
+
   def soft_destroy
     timestamp = Time.current
     success = nil
