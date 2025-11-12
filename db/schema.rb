@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_10_211734) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_12_002232) do
   create_table "account_config_histories", force: :cascade do |t|
     t.integer "account_id", null: false
     t.date "at"
@@ -35,7 +35,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_211734) do
     t.index ["archived"], name: "accounts_archived_idx"
     t.index ["currency"], name: "accounts_currency_idx"
     t.index ["deleted_at"], name: "accounts_deleted_at_idx"
-    t.index ["parent_id"], name: "index_accounts_on_parent_id"
+    t.index ["parent_id"], name: "accounts_parent_idx"
     t.index ["type"], name: "accounts_type_idx"
   end
 
@@ -110,9 +110,35 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_211734) do
     t.index ["tag"], name: "characters_tag_uniqueness_idx", unique: true
   end
 
-# Could not dump table "file_systems" because of following StandardError
-#   Unknown type 'foreign_key_type' for column 'mountable_id'
+  create_table "file_system_items", force: :cascade do |t|
+    t.integer "archive_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "name", null: false
+    t.integer "parentable_id", null: false
+    t.string "parentable_type", null: false
+    t.string "type", null: false
+    t.datetime "updated_at", null: false
+    t.string "version", null: false
+    t.index ["archive_id"], name: "index_file_system_items_on_archive_id"
+    t.index ["deleted_at"], name: "file_system_items_deleted_at_index"
+    t.index ["name", "parentable_type", "parentable_id"], name: "file_system_items_name_uniqueness_index", unique: true, where: "parentable_type != 'FileSystem::Item::File'"
+    t.index ["name"], name: "index_file_system_items_on_name"
+    t.index ["parentable_type", "parentable_id"], name: "file_system_items_parentable_index"
+    t.index ["type"], name: "file_system_items_type_index"
+  end
 
+  create_table "file_systems", force: :cascade do |t|
+    t.integer "archive_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.integer "mountable_id", null: false
+    t.string "mountable_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["archive_id"], name: "index_file_systems_on_archive_id"
+    t.index ["deleted_at"], name: "file_system_deleted_at_index"
+    t.index ["mountable_type", "mountable_id"], name: "file_systems_mountable_index"
+  end
 
   create_table "padlocks", force: :cascade do |t|
     t.integer "character_id", null: false
@@ -169,13 +195,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_211734) do
   end
 
   add_foreign_key "account_config_histories", "accounts"
-  add_foreign_key "accounts", "accounts", column: "parent_id"
   add_foreign_key "accounts", "archives"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "archive_access_keys", "archives"
   add_foreign_key "archive_access_keys", "characters", column: "owner_id"
   add_foreign_key "archives", "characters", column: "owner_id"
+  add_foreign_key "file_system_items", "archives"
+  add_foreign_key "file_systems", "archives"
   add_foreign_key "padlocks", "characters"
   add_foreign_key "sessions", "characters"
   add_foreign_key "transactions", "accounts", column: "from_id"
