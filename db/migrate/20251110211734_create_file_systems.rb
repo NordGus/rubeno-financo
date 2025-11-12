@@ -7,7 +7,12 @@ class CreateFileSystems < ActiveRecord::Migration[8.1]
         :mountable,
         polymorphic: true,
         null: false,
-        index: { name: :file_systems_mountable_index, unique: true },
+        index: {
+          name: :file_systems_mountable_index,
+          unique: true,
+          comment: "A uniqueness constraint for file system's mounting points, ensuring a single file system is " \
+            "mounted to the mountable record only."
+        },
         comment: "Is a polymorphic relation to indicate the record to which the file system is mounted to. This is used " \
           "to make the file system feature flexible enough to be related to any model so the user can store files " \
           "related to such model record an structure it any way the want to"
