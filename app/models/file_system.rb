@@ -51,4 +51,8 @@ class FileSystem < ApplicationRecord
 
     success
   end
+
+  def soft_destroy!
+    fail ActiveRecord::Rollback unless soft_destroy
+  end
 end

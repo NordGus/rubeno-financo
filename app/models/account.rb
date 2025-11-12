@@ -57,6 +57,7 @@ class Account < ApplicationRecord
       child_debit_transactions.update_all(deleted_at: timestamp)
       credit_transactions.update_all(deleted_at: timestamp)
       debit_transactions.update_all(deleted_at: timestamp)
+      file_system.soft_destroy!
       success = update!(deleted_at: timestamp)
       Cleanup::DestroySoftDeletedRecordJob.perform_later(self)
     end
