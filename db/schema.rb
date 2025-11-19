@@ -135,6 +135,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_002232) do
     t.integer "mountable_id", null: false
     t.string "mountable_type", null: false
     t.datetime "updated_at", null: false
+    t.string "version", null: false
     t.index ["archive_id"], name: "index_file_systems_on_archive_id"
     t.index ["deleted_at"], name: "file_system_deleted_at_index"
     t.index ["mountable_type", "mountable_id"], name: "file_systems_mountable_index", unique: true

@@ -24,6 +24,12 @@ class CreateFileSystems < ActiveRecord::Migration[8.1]
         comment: "The archive that the file system belongs to. This column is used for a quick authorization check " \
           "when a user tries to access the file system or any of its items."
       )
+      t.string(
+        :version,
+        null: false,
+        comment: "The version of the file system's changes. This is used to handle client-side cache invalidation " \
+          "product of changes on the underline file system items that bubbles up the file tree."
+      )
       t.datetime(
         :deleted_at,
         index: { name: :file_system_deleted_at_index },
