@@ -18,6 +18,37 @@ class FileSystem::Item < ApplicationRecord
 
   has_many :children, class_name: "FileSystem::Item", as: :parentable, dependent: :destroy
 
-  normalize :name, with: ->(name) { name&.strip }
-  normalize :version, with: ->(version) { version || Time.current.to_fs(:number) }
+  normalizes :name, with: ->(name) { name&.strip }
+  normalizes :version, with: ->(version) { version || Time.current.to_fs(:number) }
+
+  # returns the file_system_route for this directory, starting with the file system root and ending with this directory.
+  # @note This method is memoized because its build by an N+1 query, and I haven't found a way to avoid it. But I do not
+  #   expect this N+1 query to be a problem in practice because the debt of the file tree in a file system would not be
+  #   very deep.
+  def file_system_route
+    @file_system_route ||= begin
+      current = self
+      breadcrumbs = []
+
+      loop do
+        breadcrumbs.prepend(current)
+        break unless current.respond_to?(:parentable)
+        current = current.parentable
+      end
+
+      breadcrumbs
+    end
+  end
+
+  def is_a_file_version?
+    is_a_file? && parentable_type == FileSystem::Item::File.name
+  end
+
+  def is_a_file?
+    type == FileSystem::Item::File.name
+  end
+
+  def is_a_directory?
+    type == FileSystem::Item::Directory.name
+  end
 end
