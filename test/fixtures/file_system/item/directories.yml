@@ -35,12 +35,6 @@ protagonist_archive_checking_account_file_system_ships_repairs_directory:
   <<: *protagonist_archive_checking_account_file_system_base_item
   name: "Ship's Receipts"
 
-protagonist_archive_checking_account_file_system_first_date:
-  <<: *DEFAULTS
-  <<: *protagonist_archive_checking_account_file_system_base_item
-  name: <%= Time.current.to_date.to_fs(:iso8601) %>
-  parentable: protagonist_archive_checking_account_file_system_ships_repairs_directory (FileSystem::Item::Directory)
-
 protagonist_archive_checking_account_file_system_groceries_directory:
   <<: *DEFAULTS
   <<: *protagonist_archive_checking_account_file_system_base_item
