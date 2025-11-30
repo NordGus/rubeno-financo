@@ -16,10 +16,114 @@ protagonist_archive_checking_account_file_system_base_item: &protagonist_archive
   archive: protagonist_archive
   parentable: protagonist_archive_checking_account_file_system (FileSystem)
 
-protagonist_shared_family_archive_checking_account_file_system_base_item: &protagonist_shared_family_archive_checking_account_file_system_base_item
-  archive: protagonist_shared_family_archive
-  parentable: protagonist_shared_family_archive_checking_account_file_system (FileSystem)
-
 DEFAULTS: &DEFAULTS
   type: <%= FileSystem::Item::File.name %>
   version: <%= Time.current.to_fs(:number) %>
+
+
+# Root > Bounties > Current Year
+protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Monkey D Luffy.png"
+  parentable: protagonist_archive_checking_account_file_system_bounties_current_year_directory (FileSystem::Item::Directory)
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Monkey D Luffy.png"
+  version: <%= (Time.current - 1.hour).to_fs(:number) %>
+  parentable: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version (FileSystem::Item::File)
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Monkey D Luffy.png"
+  version: <%= (Time.current - 2.hour).to_fs(:number) %>
+  parentable: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version (FileSystem::Item::File)
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Monkey D Luffy.png"
+  version: <%= (Time.current - 3.hour).to_fs(:number) %>
+  parentable: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version (FileSystem::Item::File)
+
+protagonist_archive_bounty_income_file_system_zoro_bounty_file:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Roronoa Zoro.png"
+  parentable: protagonist_archive_checking_account_file_system_bounties_current_year_directory (FileSystem::Item::Directory)
+
+protagonist_archive_bounty_income_file_system_sanji_bounty_file:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Vinsmoke Sanji.png"
+  parentable: protagonist_archive_checking_account_file_system_bounties_current_year_directory (FileSystem::Item::Directory)
+
+# Root > Bounties
+
+protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "God Ussop.png"
+  parentable: protagonist_archive_checking_account_file_system_bounties_directory (FileSystem::Item::Directory)
+
+protagonist_archive_bounty_income_file_system_ussop_bounty_file_second_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "God Ussop.png"
+  version: <%= (Time.current - 1.hour).to_fs(:number) %>
+  parentable: protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version (FileSystem::Item::File)
+
+protagonist_archive_bounty_income_file_system_ussop_bounty_file_first_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "God Ussop.png"
+  version: <%= (Time.current - 2.hour).to_fs(:number) %>
+  parentable: protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version (FileSystem::Item::File)
+
+# Root > Ship's Receipts
+protagonist_archive_checking_account_file_system_galley_la_second_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Galley-La - Thousand Sunny.xlsx"
+  parentable: protagonist_archive_checking_account_file_system_ships_repairs_directory (FileSystem::Item::Directory)
+
+protagonist_archive_checking_account_file_system_galley_la_first_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Galley-La - Thousand Sunny.xlsx"
+  version: <%= (Time.current - 1.hour).to_fs(:number) %>
+  parentable: protagonist_archive_checking_account_file_system_galley_la_second_version (FileSystem::Item::File)
+
+protagonist_archive_checking_account_file_system_wrapping_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Wrapping - Thousand Sunny.pdf"
+  parentable: protagonist_archive_checking_account_file_system_ships_repairs_directory (FileSystem::Item::Directory)
+
+# Root > Groceries > Current Year > Current Month
+protagonist_archive_checking_account_file_system_groceries_market_file:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: <%= "Mercadona-#{Time.current.to_date.to_fs(:iso8601)}.png" %>
+  parentable: protagonist_archive_checking_account_file_system_current_month_groceries_directory (FileSystem::Item::Directory)
+
+# Root
+protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Nami.png"
+
+protagonist_archive_bounty_income_file_system_nami_bounty_file_first_version:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Nami.png"
+  version: <%= (Time.current - 1.hour).to_fs(:number) %>
+  parentable: protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version (FileSystem::Item::File)
+
+protagonist_archive_bounty_income_file_system_robin_bounty_file:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Nico Robin.png"
