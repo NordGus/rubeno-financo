@@ -1,0 +1,21 @@
+# For more information: https://edgeapi.rubyonrails.org/classes/ActiveStorage/FixtureSet.html
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version_file_attachment:
+  name: file
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version (FileSystem::Item::File)
+  blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version_blob
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version_file_attachment:
+  name: file
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version (FileSystem::Item::File)
+  blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version_blob
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version_file_attachment:
+  name: file
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version (FileSystem::Item::File)
+  blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version_blob
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version_file_attachment:
+  name: file
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version (FileSystem::Item::File)
+  blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version_blob

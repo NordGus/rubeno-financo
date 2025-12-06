@@ -1,0 +1,33 @@
+# For more information: https://edgeapi.rubyonrails.org/classes/ActiveStorage/FixtureSet.html
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system/bounties/Gemini_Generated_Image_Corgi_D_Luffy.png",
+    content_type: "image/png",
+    service_name: "local"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system/bounties/Gemini_Generated_Image_Corgi_D_Luffy.png",
+    content_type: "image/png",
+    service_name: "local"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system/bounties/Gemini_Generated_Image_Corgi_D_Luffy.png",
+    content_type: "image/png",
+    service_name: "local"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system/bounties/Gemini_Generated_Image_Corgi_D_Luffy.png",
+    content_type: "image/png",
+    service_name: "local"
+  )
+%>
