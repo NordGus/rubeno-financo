@@ -31,3 +31,19 @@ protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_versio
     service_name: "local"
   )
 %>
+
+protagonist_archive_bounty_income_file_system_zoro_bounty_file_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system/bounties/Gemini_Generated_Image_Zoro.png",
+    content_type: "image/png",
+    service_name: "local"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_sanji_bounty_file_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system/bounties/Gemini_Generated_Image_Sanji.png",
+    content_type: "image/png",
+    service_name: "local"
+  )
+%>
