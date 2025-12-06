@@ -10,7 +10,6 @@
 _fixture:
   ignore:
     - protagonist_archive_checking_account_file_system_base_item
-    - protagonist_shared_family_archive_checking_account_file_system_base_item
 
 protagonist_archive_checking_account_file_system_base_item: &protagonist_archive_checking_account_file_system_base_item
   archive: protagonist_archive
