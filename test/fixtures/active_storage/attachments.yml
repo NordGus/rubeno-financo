@@ -2,80 +2,80 @@
 
 protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version_blob
 
 protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version_blob
 
 protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version_blob
 
 protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version_blob
 
 protagonist_archive_bounty_income_file_system_zoro_bounty_file_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_zoro_bounty_file (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_zoro_bounty_file (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_zoro_bounty_file_blob
 
 protagonist_archive_bounty_income_file_system_sanji_bounty_file_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_sanji_bounty_file (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_sanji_bounty_file (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_sanji_bounty_file_blob
 
 protagonist_archive_bounty_income_file_system_ussop_bounty_file_first_version_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_ussop_bounty_file_first_version (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_ussop_bounty_file_first_version (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_ussop_bounty_file_first_version_blob
 
 protagonist_archive_bounty_income_file_system_ussop_bounty_file_second_version_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_ussop_bounty_file_second_version (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_ussop_bounty_file_second_version (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_ussop_bounty_file_second_version_blob
 
 protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version_blob
 
 protagonist_archive_checking_account_file_system_galley_la_first_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_galley_la_first_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_galley_la_first_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_galley_la_first_version_blob
 
 protagonist_archive_checking_account_file_system_galley_la_second_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_galley_la_second_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_galley_la_second_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_galley_la_second_version_blob
 
 protagonist_archive_checking_account_file_system_wrapping_version_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_wrapping_version (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_wrapping_version (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_wrapping_version_blob
 
 protagonist_archive_checking_account_file_system_groceries_market_file_file_attachment:
   name: file
-  record: protagonist_archive_checking_account_file_system_groceries_market_file (FileSystem::Item)
+  record: protagonist_archive_checking_account_file_system_groceries_market_file (FileSystem::Item::File)
   blob: protagonist_archive_checking_account_file_system_groceries_market_file_blob
 
 protagonist_archive_bounty_income_file_system_nami_bounty_file_first_version_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_nami_bounty_file_first_version (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_nami_bounty_file_first_version (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_nami_bounty_file_first_version_blob
 
 protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version_blob
 
 protagonist_archive_bounty_income_file_system_robin_bounty_file_file_attachment:
   name: file
-  record: protagonist_archive_bounty_income_file_system_robin_bounty_file (FileSystem::Item)
+  record: protagonist_archive_bounty_income_file_system_robin_bounty_file (FileSystem::Item::File)
   blob: protagonist_archive_bounty_income_file_system_robin_bounty_file_blob
