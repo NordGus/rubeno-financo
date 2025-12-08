@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     post :access, on: :member
   end
 
-  resources :file_systems
+  resources :file_systems, only: [ :show ]
 
   namespace :file_systems do
     resources :files, only: [ :show, :create, :edit, :update, :destroy ] do

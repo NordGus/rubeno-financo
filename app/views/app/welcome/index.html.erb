@@ -6,3 +6,6 @@
   <%= @test_account.name %>
 </p>
 
+<%= turbo_frame_tag dom_id(@test_account.file_system), src: file_system_path(@test_account.file_system) do %>
+  <p>Loading...</p>
+<% end %>

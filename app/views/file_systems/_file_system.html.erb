@@ -1,0 +1,15 @@
+<section>
+  <div>
+    <%= file_system.mountable.name %>
+  </div>
+  <div>
+    <% file_system.directories.each do |directory| %>
+      <p>Directory: <%= directory.name %></p>
+    <% end %>
+    <% file_system.files.each do |file| %>
+      <p>
+        <%= link_to file.name, download_file_systems_file_path(file), target: "_blank" %>
+      </p>
+    <% end %>
+  </div>
+</section>

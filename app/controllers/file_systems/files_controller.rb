@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class FileSystems::FilesController < ApplicationController
-  before_action :set_file, only: [ :attachment ]
+class FileSystems::FilesController < AppController
+  before_action :set_file, only: [ :attachment, :download ]
 
   def attachment
     send_data @file.file.download,
@@ -11,7 +11,7 @@ class FileSystems::FilesController < ApplicationController
   end
 
   def download
-    send_file @file.file.download,
+    send_data @file.file.download,
               filename: [ @file.version, @file.name ].join("_"),
               type: @file.file.content_type || "application/octet-stream",
               disposition: "attachment"
