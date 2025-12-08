@@ -11,12 +11,12 @@ Rails.application.routes.draw do
     post :access, on: :member
   end
 
-  resources :file_systems, only: [ :show ]
-
-  namespace :file_systems do
-    resources :files, only: [ :show, :create, :edit, :update, :destroy ] do
-      get :attachment, on: :member
-      get :download, on: :member
+  resources :file_systems, only: [ :show ] do
+    scope module: :file_systems do
+      resources :files, only: [ :show, :create, :edit, :update, :destroy ] do
+        get :attachment, on: :member
+        get :download, on: :member
+      end
     end
   end
 

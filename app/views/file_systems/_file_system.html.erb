@@ -8,7 +8,7 @@
     <% end %>
     <% file_system.files.each do |file| %>
       <p>
-        <%= link_to file.name, download_file_systems_file_path(file), target: "_blank" %>
+        <%= link_to file.name, download_file_system_file_path(file_system, file), target: "_blank" %>
       </p>
     <% end %>
   </div>

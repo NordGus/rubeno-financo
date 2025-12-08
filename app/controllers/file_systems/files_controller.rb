@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class FileSystems::FilesController < AppController
+class FileSystems::FilesController < FileSystemsController
+  before_action :set_file_system
   before_action :set_file, only: [ :attachment, :download ]
 
   def attachment

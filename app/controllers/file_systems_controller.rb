@@ -12,6 +12,6 @@ class FileSystemsController < AppController
   private
 
   def set_file_system
-    @file_system = Current.archive.file_systems.includes(:directories, :files, :mountable).find(params.expect(:id))
+    @file_system = Current.archive.file_systems.includes(:directories, :files, :mountable).find(params.fetch(:file_system_id, params.expect(:id)))
   end
 end
