@@ -1,0 +1,3 @@
+<%= turbo_stream.update @file_system do %>
+  <%= render partial: "file_system", locals: { file_system: @file_system } %>
+<% end %>

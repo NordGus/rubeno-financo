@@ -1,0 +1,29 @@
+<%#
+  This template partial is based on app/views/file_systems/_file_system.html.erb so any changes should be made there too
+  and vise versa
+%>
+<section>
+  <div style="display: flex; align-items: center; gap: 0.5rem;">
+    <% directory.file_system_route.each do |breadcrumb| %>
+      <% if breadcrumb.is_a? FileSystem %>
+        <%= link_to breadcrumb.mountable.name, file_system_path(breadcrumb, format: :turbo_stream), data: { turbo_prefetch: false } %>
+      <% elsif breadcrumb == directory %>
+        <span><%= breadcrumb.name %></span>
+      <% else %>
+        <%= link_to breadcrumb.name, file_system_directory_path(file_system, breadcrumb, format: :turbo_stream), data: { turbo_prefetch: false } %>
+      <% end %>
+    <% end %>
+  </div>
+  <div>
+    <% directory.directories.each do |directory| %>
+      <p>
+        Directory: <%= link_to directory.name, file_system_directory_path(file_system, directory, format: :turbo_stream), data: { turbo_prefetch: false } %>
+      </p>
+    <% end %>
+    <% directory.files.each do |file| %>
+      <p>
+        File: <%= link_to file.name, download_file_system_file_path(file_system, file), target: "_blank" %>
+      </p>
+    <% end %>
+  </div>
+</section>

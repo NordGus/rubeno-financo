@@ -4,11 +4,21 @@
   </div>
   <div>
     <% file_system.directories.each do |directory| %>
-      <p>Directory: <%= directory.name %></p>
+      <p>
+        Directory: <%=
+          link_to directory.name,
+                  file_system_directory_path(file_system, directory, format: :turbo_stream),
+                  data: { turbo_prefetch: false }
+        %>
+      </p>
     <% end %>
     <% file_system.files.each do |file| %>
       <p>
-        <%= link_to file.name, download_file_system_file_path(file_system, file), target: "_blank" %>
+        File: <%=
+          link_to file.name,
+                  download_file_system_file_path(file_system, file),
+                  target: "_blank"
+        %>
       </p>
     <% end %>
   </div>
