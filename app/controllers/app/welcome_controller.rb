@@ -2,10 +2,6 @@
 
 class App::WelcomeController < AppController
   def index
-    @test_file = FileSystem::Item::File.find_by!(
-      name: "Monkey D Luffy.png",
-      parentable_type: "FileSystem::Item::Directory",
-      archive: Current.archive
-    )
+    @test_account = Current.archive.accounts.includes(:file_system).find_by!(type: "Account::Capital::Checking", name: "Meat funds")
   end
 end
