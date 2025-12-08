@@ -11,6 +11,15 @@ Rails.application.routes.draw do
     post :access, on: :member
   end
 
+  resources :file_systems
+
+  namespace :file_systems do
+    resources :files, only: [ :show, :create, :edit, :update, :destroy ] do
+      get :attachment, on: :member
+      get :download, on: :member
+    end
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
