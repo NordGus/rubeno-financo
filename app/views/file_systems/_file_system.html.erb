@@ -10,7 +10,7 @@
     <% end %>
     <% file_system.files.each do |file| %>
       <%= link_to download_file_system_file_path(file_system, file), class: "file-system-item", target: "_blank" do %>
-        <i class="fa-solid fa-file"></i> <span><%= file.name %></span>
+        <i class="fa-regular fa-file"></i> <span><%= file.name %></span>
       <% end %>
     <% end %>
   </div>
