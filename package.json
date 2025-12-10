@@ -1,0 +1,16 @@
+{
+  "name": "rubeno-financo",
+  "version": "1.0.0",
+  "description": "This node setup is only for development purposes.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NordGus/rubeno-financo.git"
+  },
+  "private": true,
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2"
+  }
+}
