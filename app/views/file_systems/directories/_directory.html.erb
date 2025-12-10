@@ -6,24 +6,26 @@
   <div style="display: flex; align-items: center; gap: 0.5rem;">
     <% directory.file_system_route.each do |breadcrumb| %>
       <% if breadcrumb.is_a? FileSystem %>
-        <%= link_to breadcrumb.mountable.name, file_system_path(breadcrumb, format: :turbo_stream), data: { turbo_prefetch: false } %>
+        <%= link_to breadcrumb.mountable.name, file_system_path(breadcrumb) %>
       <% elsif breadcrumb == directory %>
-        <span><%= breadcrumb.name %></span>
+        <span>/</span> <span><%= breadcrumb.name %></span>
       <% else %>
-        <%= link_to breadcrumb.name, file_system_directory_path(file_system, breadcrumb, format: :turbo_stream), data: { turbo_prefetch: false } %>
+        <span>/</span> <%= link_to breadcrumb.name, file_system_directory_path(file_system, breadcrumb) %>
       <% end %>
     <% end %>
   </div>
-  <div>
+  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
     <% directory.directories.each do |directory| %>
-      <p>
-        Directory: <%= link_to directory.name, file_system_directory_path(file_system, directory, format: :turbo_stream), data: { turbo_prefetch: false } %>
-      </p>
+      <%= link_to file_system_directory_path(file_system, directory), style: "display: flex; flex-direction: column; align-items: center; justify-items: center;" do %>
+        <%= image_tag "icons/directory.svg", width: 100, height: 100, class: "directory-icon" %>
+        <p><%= directory.name %></p>
+      <% end %>
     <% end %>
     <% directory.files.each do |file| %>
-      <p>
-        File: <%= link_to file.name, download_file_system_file_path(file_system, file), target: "_blank" %>
-      </p>
+      <%= link_to download_file_system_file_path(file_system, file), target: "_blank", style: "display: flex; flex-direction: column; align-items: center; justify-items: center;" do %>
+        <%= image_tag attachment_file_system_file_path(file_system, file), width: 100, height: 100 %>
+        <p><%= file.name %></p>
+      <% end %>
     <% end %>
   </div>
 </section>
