@@ -1,0 +1,23 @@
+.file-system {
+    a {
+        color: var(--color-text);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .file-system-items {
+        gap: 0.5rem;
+        display: flex;
+        flex-direction: column;
+
+        a.file-system-item {
+            display: flex;
+            align-items: center;
+            justify-items: start;
+            gap: 0.5rem;
+        }
+    }
+}

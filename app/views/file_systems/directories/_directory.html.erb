@@ -2,29 +2,30 @@
   This template partial is based on app/views/file_systems/_file_system.html.erb so any changes should be made there too
   and vise versa
 %>
-<section>
-  <div style="display: flex; align-items: center; gap: 0.5rem;">
+<section class="file-system">
+  <div class="bread-crumbs">
     <% directory.file_system_route.each do |breadcrumb| %>
       <% if breadcrumb.is_a? FileSystem %>
-        <%= link_to breadcrumb.mountable.name, file_system_path(breadcrumb) %>
+        <%= link_to file_system_path(breadcrumb) do %>
+          <i class="fa-solid fa-folder-tree"></i>
+        <% end %>
       <% elsif breadcrumb == directory %>
-        <span>/</span> <span><%= breadcrumb.name %></span>
+        <span><%= breadcrumb.name %></span>
       <% else %>
-        <span>/</span> <%= link_to breadcrumb.name, file_system_directory_path(file_system, breadcrumb) %>
+        <%= link_to breadcrumb.name, file_system_directory_path(file_system, breadcrumb) %>
       <% end %>
+      <span>/</span>
     <% end %>
   </div>
-  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+  <div class="file-system-items">
     <% directory.directories.each do |directory| %>
-      <%= link_to file_system_directory_path(file_system, directory), style: "display: flex; flex-direction: column; align-items: center; justify-items: center;" do %>
-        <%= image_tag "icons/directory.svg", width: 100, height: 100, class: "directory-icon" %>
-        <p><%= directory.name %></p>
+      <%= link_to file_system_directory_path(file_system, directory), class: "file-system-item" do %>
+        <i class="fa-solid fa-folder"></i> <span><%= directory.name %></span>
       <% end %>
     <% end %>
     <% directory.files.each do |file| %>
-      <%= link_to download_file_system_file_path(file_system, file), target: "_blank", style: "display: flex; flex-direction: column; align-items: center; justify-items: center;" do %>
-        <%= image_tag attachment_file_system_file_path(file_system, file), width: 100, height: 100 %>
-        <p><%= file.name %></p>
+      <%= link_to download_file_system_file_path(file_system, file), class: "file-system-item", target: "_blank" do %>
+        <i class="fa-solid fa-file"></i> <span><%= file.name %></span>
       <% end %>
     <% end %>
   </div>
