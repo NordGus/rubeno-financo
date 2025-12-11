@@ -28,29 +28,7 @@
         <i class="fa-regular fa-file"></i> <span><%= file.name %></span>
       <% end %>
       <dialog class="file-previewer" name="<%= dom_id(file) %>">
-        <div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-          <h4 style="flex: 1; text-align: center">File Details</h4>
-          <button data-action="click->dialog#close">
-            <i class="fa-solid fa-xmark lg-xs"></i>
-          </button>
-        </div>
-        <div class="body" style="display: flex; gap: 1rem;">
-          <% if file.file.image? %>
-            <%= image_tag attachment_file_system_file_path(file_system, file), width: 600, height: 600, alt: file.name %>
-          <% end %>
-          <div>
-            <p>Name: <%= file.name %></p>
-            <p>Size: <%= number_to_human_size(file.file.byte_size) %></p>
-            <% if file.versions.any? %>
-              <h6>Versions</h6>
-              <% file.versions.each do |version| %>
-                <%= link_to download_file_system_file_path(file_system, version), target: "_blank" do %>
-                  <p><%= version.version %>: <%= number_to_human_size(version.file.byte_size) %></p>
-                <% end %>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
+        <%= render partial: "file_systems/files/preview_skeleton", locals: { file_system: file_system, file: file } %>
       </dialog>
     <% end %>
   </div>

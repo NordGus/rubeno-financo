@@ -42,6 +42,8 @@ class FileSystem < ApplicationRecord
   validates :mountable_type, exclusion: { in: [ Account::System::History.name ] }
   validates :mountable, presence: true, uniqueness: true
 
+  delegate :name, to: :mountable
+
   def soft_destroy
     timestamp = Time.current
     success = nil

@@ -2,7 +2,10 @@
 
 class FileSystems::FilesController < FileSystemsController
   before_action :set_file_system
-  before_action :set_file, only: [ :attachment, :download ]
+  before_action :set_file, only: [ :show, :attachment, :download ]
+
+  def show
+  end
 
   def attachment
     send_data @file.file.download,

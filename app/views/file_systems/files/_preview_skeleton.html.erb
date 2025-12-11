@@ -1,0 +1,11 @@
+<%= turbo_frame_tag dom_id(file), src: file_system_file_path(file_system, file), class: "file-previewer" do %>
+  <div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+    <h4 style="flex: 1; text-align: center">File Details</h4>
+    <button data-action="click->dialog#close">
+      <i class="fa-solid fa-xmark lg-xs"></i>
+    </button>
+  </div>
+  <div class="body" style="display: flex; gap: 1rem; min-height: 600px; align-items: center; justify-content: center;">
+    <p>Loading...</p>
+  </div>
+<% end %>
