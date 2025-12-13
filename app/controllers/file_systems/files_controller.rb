@@ -2,9 +2,17 @@
 
 class FileSystems::FilesController < FileSystemsController
   before_action :set_file_system
-  before_action :set_file, only: [ :show, :attachment, :download ]
+  before_action :set_file, only: [ :show, :destroy, :attachment, :download ]
 
   def show
+  end
+
+  def destroy
+    if @file.soft_destroy
+      head :no_content
+    else
+      head :unprocessable_entity, error: @file.errors.full_messages.join(", ")
+    end
   end
 
   def attachment

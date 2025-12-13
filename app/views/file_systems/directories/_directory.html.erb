@@ -27,7 +27,7 @@
       <%= link_to download_file_system_file_path(file_system, file), class: "file-system-item", target: "_blank", data: { action: "click->dialog#open", dialog: dom_id(file) } do %>
         <i class="fa-regular fa-file"></i> <span><%= file.name %></span>
       <% end %>
-      <dialog class="file-previewer" name="<%= dom_id(file) %>">
+      <dialog class="file-previewer" name="<%= dom_id(file) %>" data-dialog-target="dialog">
         <%= render partial: "file_systems/files/preview_skeleton", locals: { file_system: file_system, file: file } %>
       </dialog>
     <% end %>

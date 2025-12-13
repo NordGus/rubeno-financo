@@ -1,5 +1,6 @@
 class FirstRunsController < ApplicationController
   allow_unauthenticated_access
+  allow_out_of_archive_access
 
   before_action :prevent_repeats
 

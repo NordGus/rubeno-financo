@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FileSystemsController < AppController
+class FileSystemsController < ApplicationController
   before_action :set_file_system, only: [ :show ]
 
   def show

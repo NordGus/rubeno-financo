@@ -22,5 +22,30 @@
     <%= link_to download_file_system_file_path(file_system, file), target: "_blank" do %>
       <button><i class="fa-solid fa-download"></i> Download</button>
     <% end %>
+    <div data-controller="confirmation-alert" style="margin: 0;">
+      <button data-action="click->confirmation-alert#open">
+        <i class="fa-solid fa-trash"></i> Delete
+      </button>
+      <dialog data-confirmation-alert-target="dialog" class="alert">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+          <h4 style="flex: 1; text-align: center">Are you sure?</h4>
+        </div>
+        <div class="body" style="margin: 0; padding: 0;">
+          You are about to delete this file, this action cannot be undone.
+        </div>
+        <div style="margin: 0; padding: 0; display: flex; justify-content: flex-end; gap: 0.5rem;">
+          <button data-action="click->confirmation-alert#cancel">No</button>
+          <%=
+            button_to "Yes",
+                      file_system_file_path(file_system, file),
+                      method: :delete,
+                      data: {
+                        action: "click->confirmation-alert#close click->dialog#close",
+                        dialog: dom_id(file)
+                      }
+          %>
+        </div>
+      </dialog>
+    </div>
   </div>
 </div>

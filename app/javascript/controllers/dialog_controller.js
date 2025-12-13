@@ -14,8 +14,9 @@ export default class extends Controller {
   }
 
   close(event) {
-    event.preventDefault()
+    const dialog_name = event.currentTarget.dataset.dialog
+    const dialog = this.element.getElementsByTagName("dialog").namedItem(dialog_name)
 
-    event.currentTarget.closest("dialog").close()
+    dialog.close()
   }
 }

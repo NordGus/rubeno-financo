@@ -1,7 +1,8 @@
-class ArchivesController < AppController
+class ArchivesController < ApplicationController
   allow_out_of_archive_access
 
   before_action :set_archive, only: %i[ edit update destroy ]
+  before_action :set_accessible_archive, only: [ :access, :exit ]
   before_action :set_characters, only: %i[ edit new ]
 
   # GET /app/archives or /app/archives.json
@@ -59,14 +60,24 @@ class ArchivesController < AppController
 
   # POST /app/archives/1/access
   def access
-    @archive = Archive.accessible_by(Current.character.id).find(params.expect(:id))
     Current.session.update!(archive: @archive)
+
     redirect_to root_url, notice: "#{@archive.name} selected!"
+  end
+
+  def exit
+    Current.session.update!(archive: nil)
+
+    redirect_to archives_url
   end
 
   private
     def set_archive
       @archive = Current.character.archives.find(params.expect(:id))
+    end
+
+    def set_accessible_archive
+      @archive = Archive.accessible_by(Current.character.id).find(params.expect(:id))
     end
 
     def set_characters

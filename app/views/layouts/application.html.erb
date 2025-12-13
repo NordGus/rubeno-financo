@@ -23,6 +23,14 @@
   </head>
 
   <body>
+  <% if Current.session.present? %>
+    <%= link_to "Close Session", session_path, data: { turbo_method: :delete } %>
+  <% end %>
+
+  <% if Current.session.present? && Current.archive.present? %>
+    <%= link_to "Change Archive", exit_archive_url(Current.archive), data: { turbo_method: :post } %>
+  <% end %>
+
     <%= yield %>
   </body>
 </html>

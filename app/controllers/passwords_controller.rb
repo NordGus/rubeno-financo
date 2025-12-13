@@ -1,5 +1,6 @@
 class PasswordsController < ApplicationController
   allow_unauthenticated_access
+  allow_out_of_archive_access
 
   before_action :set_key_by_token, only: %i[ edit update ]
 
