@@ -5,8 +5,6 @@ module Authentication
 
   SESSION_IDENTIFIER_KEY = :session_token
 
-  private_constant :SESSION_IDENTIFIER_KEY
-
   included do
     before_action :require_authentication
     helper_method :authenticated?

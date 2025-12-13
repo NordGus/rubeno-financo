@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: [ :new, :create, :edit, :update ]
   resources :archives, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     post :access, on: :member
+    post :exit, on: :member
   end
 
   resources :file_systems, only: [ :show ] do
