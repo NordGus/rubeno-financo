@@ -16,6 +16,8 @@ class FileSystem::Item < ApplicationRecord
             comparison: { other_than: :id },
             if: ->(record) { record.type == record.parentable_type }
 
+  scope :in_system, -> { where(deleted_at: nil) }
+
   has_many :children, class_name: "FileSystem::Item", as: :parentable, dependent: :destroy
 
   normalizes :name, with: ->(name) { name&.strip }
