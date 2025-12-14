@@ -12,6 +12,6 @@ class FileSystems::DirectoriesController < FileSystemsController
 
   private
     def set_directory
-      @directory = Current.archive.file_system_directories.includes(:directories, :files).find(params.expect(:id))
+      @directory = Current.archive.file_system_directories.includes(:directories, :files).in_system.find(params.expect(:id))
     end
 end
