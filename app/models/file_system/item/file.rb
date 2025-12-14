@@ -5,7 +5,7 @@ class FileSystem::Item::File < FileSystem::Item
 
   has_many :versions, class_name: "FileSystem::Item::File", as: :parentable, dependent: :destroy
 
-  default_scope { includes(:versions) }
+  scope :latest_versions, -> { where.not(parentable_type: FileSystem::Item::File.name) }
 
   # FileSystem::Item::File can only be a child of a FileSystem, a Directory or a File. When the File is a child of
   # another File, it is considered a version of the parent File.
