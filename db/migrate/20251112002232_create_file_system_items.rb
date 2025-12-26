@@ -49,5 +49,14 @@ class CreateFileSystemItems < ActiveRecord::Migration[8.1]
       comment: "A uniqueness constraint for file system items with the same name in the same parent directory.",
       name: :file_system_items_name_uniqueness_index
     )
+
+    add_index(
+      :file_system_items,
+      [ :parentable_type, :parentable_id ],
+      unique: true,
+      where: "parentable_type = 'FileSystem::Item::Mount'",
+      comment: "A uniqueness constraint for mounts so that they can only be mounted once per parentable record.",
+      name: :file_system_items_mount_uniqueness_index
+    )
   end
 end

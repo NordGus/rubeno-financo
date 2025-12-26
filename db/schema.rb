@@ -124,21 +124,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_002232) do
     t.index ["deleted_at"], name: "file_system_items_deleted_at_index"
     t.index ["name", "parentable_type", "parentable_id"], name: "file_system_items_name_uniqueness_index", unique: true, where: "parentable_type != 'FileSystem::Item::File'"
     t.index ["name"], name: "index_file_system_items_on_name"
+    t.index ["parentable_type", "parentable_id"], name: "file_system_items_mount_uniqueness_index", unique: true, where: "parentable_type = 'FileSystem::Item::Mount'"
     t.index ["parentable_type", "parentable_id"], name: "file_system_items_parentable_index"
     t.index ["type"], name: "file_system_items_type_index"
-  end
-
-  create_table "file_systems", force: :cascade do |t|
-    t.integer "archive_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "deleted_at"
-    t.integer "mountable_id", null: false
-    t.string "mountable_type", null: false
-    t.datetime "updated_at", null: false
-    t.string "version", null: false
-    t.index ["archive_id"], name: "index_file_systems_on_archive_id"
-    t.index ["deleted_at"], name: "file_system_deleted_at_index"
-    t.index ["mountable_type", "mountable_id"], name: "file_systems_mountable_index", unique: true
   end
 
   create_table "padlocks", force: :cascade do |t|
@@ -203,7 +191,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_002232) do
   add_foreign_key "archive_access_keys", "characters", column: "owner_id"
   add_foreign_key "archives", "characters", column: "owner_id"
   add_foreign_key "file_system_items", "archives"
-  add_foreign_key "file_systems", "archives"
   add_foreign_key "padlocks", "characters"
   add_foreign_key "sessions", "characters"
   add_foreign_key "transactions", "accounts", column: "from_id"

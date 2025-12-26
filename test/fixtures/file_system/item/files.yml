@@ -13,7 +13,7 @@ _fixture:
 
 protagonist_archive_checking_account_file_system_base_item: &protagonist_archive_checking_account_file_system_base_item
   archive: protagonist_archive
-  parentable: protagonist_archive_checking_account_file_system (FileSystem)
+  parentable: protagonist_archive_checking_account_file_system (FileSystem::Item::Mount)
 
 DEFAULTS: &DEFAULTS
   type: <%= FileSystem::Item::File.name %>

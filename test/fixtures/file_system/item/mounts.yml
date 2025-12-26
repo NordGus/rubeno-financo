@@ -1,0 +1,172 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+_fixture:
+  ignore:
+    - protagonist_file_system_item_mount_base
+    - protagonist_shared_family_archive
+
+DEFAULTS: &DEFAULTS
+  type: <%= FileSystem::Item::Mount.name %>
+  version: <%= Time.current.to_fs(:number) %>
+
+protagonist_file_system_item_mount_base: &protagonist_file_system_item_mount_base
+  <<: *DEFAULTS
+  archive: protagonist_archive
+
+protagonist_shared_family_file_system_item_mount_base: &protagonist_shared_family_file_system_item_mount_base
+  <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+
+## Protagonist's archive file systems
+
+protagonist_archive_checking_account_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_checking_account (Account::Capital::Checking)
+  name: "Meat funds"
+
+protagonist_archive_treasure_account_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_treasure_account (Account::Capital::Saving)
+  name: "Treasure"
+
+protagonist_archive_wano_kuni_credit_line_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_wano_kuni_credit_line (Account::Debt::Credit)
+  name: "Momo's Shogunate's Credit Guarantee Letter"
+
+protagonist_archive_sunny_repairs_loan_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_sunny_repairs_loan (Account::Debt::Loan)
+  name: "Sunny Repairs"
+
+protagonist_archive_ship_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_ship_expense (Account::Category::Expense)
+  name: "Ship"
+
+protagonist_archive_ship_port_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_ship_port_expense (Account::Category::Expense)
+  name: "Port"
+
+protagonist_archive_ship_cargo_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_ship_cargo_expense (Account::Category::Expense)
+  name: "Repair Materials"
+
+protagonist_archive_ship_soda_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_ship_soda_expense (Account::Category::Expense)
+  name: "Soda"
+
+protagonist_archive_groceries_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_groceries_expense (Account::Category::Expense)
+  name: "Groceries"
+
+protagonist_archive_groceries_food_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_groceries_food_expense (Account::Category::Expense)
+  name: "Food"
+
+protagonist_archive_groceries_drinks_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_groceries_drinks_expense (Account::Category::Expense)
+  name: "Drinks"
+
+protagonist_archive_groceries_deserts_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_groceries_deserts_expense (Account::Category::Expense)
+  name: "Deserts"
+
+protagonist_archive_transportation_expense_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_transportation_expense (Account::Category::Expense)
+  name: "Transportation"
+
+protagonist_archive_donations_income_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_donations_income (Account::Category::Income)
+  name: "Donations"
+
+protagonist_archive_bounty_income_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_bounty_income (Account::Category::Income)
+  name: "Bounties"
+
+protagonist_archive_treasure_income_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_treasure_income (Account::Category::Income)
+  name: "Treasure"
+
+protagonist_archive_treasure_booty_income_file_system:
+  <<: *protagonist_file_system_item_mount_base
+  parentable: protagonist_archive_treasure_booty_income (Account::Category::Income)
+  name: "Booty"
+
+## Protagonist's shared family archive file systems
+
+protagonist_shared_family_archive_checking_account_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_archive_checking_account (Account::Capital::Checking)
+  name: "Hancock's Account"
+
+protagonist_shared_family_archive_treasure_account:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_archive_treasure_account (Account::Capital::Saving)
+  name: "My Amazon Lily Stash"
+
+protagonist_shared_family_archive_hancock_credit_card_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_archive_hancock_credit_card (Account::Debt::Credit)
+  name: "Hancock's Credit Line"
+
+protagonist_shared_family_archive_palace_repairs_loan_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_archive_palace_repairs_loan (Account::Debt::Loan)
+  name: "Roof repairs"
+
+protagonist_shared_family_repairs_expense_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_repairs_expense (Account::Category::Expense)
+  description: "Repairs for the Hancock's Palace"
+
+protagonist_shared_family_roof_repairs_expense_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_roof_repairs_expense (Account::Category::Expense)
+  name: "Roof"
+
+protagonist_shared_family_security_repairs_expense_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_security_repairs_expense (Account::Category::Expense)
+  name: "Security"
+
+protagonist_shared_family_furniture_repairs_expense_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_furniture_repairs_expense (Account::Category::Expense)
+  name: "Furniture"
+
+protagonist_shared_family_groceries_expenses_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_groceries_expenses (Account::Category::Expense)
+  name: "Food and Beverages"
+
+protagonist_shared_family_groceries_food_expense_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_groceries_food_expense (Account::Category::Expense)
+  name: "Dates with Hancock"
+
+protagonist_shared_family_bounty_income_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_bounty_income (Account::Category::Income)
+  description: "Bounties Kuja Pirates collect"
+
+protagonist_shared_family_treasure_income_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_treasure_income (Account::Category::Income)
+  description: "Treasure found by the Kuja Pirates"
+
+protagonist_shared_family_treasure_booty_income_file_system:
+  <<: *protagonist_shared_family_file_system_item_mount_base
+  parentable: protagonist_shared_family_treasure_booty_income (Account::Category::Income)
+  name: "Booty"
