@@ -85,7 +85,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
-    brakeman (7.1.1)
+    brakeman (7.1.2)
       racc
     builder (3.3.0)
     capybara (3.40.0)
@@ -389,7 +389,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
-  brakeman
+  brakeman (~> 7.1, >= 7.1.2)
   capybara
   debug
   importmap-rails
@@ -401,9 +401,9 @@ DEPENDENCIES
   rails (~> 8.1, >= 8.1.1)
   rubocop-rails-omakase
   selenium-webdriver
-  solid_cable
-  solid_cache
-  solid_queue
+  solid_cable (~> 3.0, >= 3.0.12)
+  solid_cache (~> 1.0, >= 1.0.10)
+  solid_queue (~> 1.2, >= 1.2.4)
   sqlite3 (>= 2.1)
   stimulus-rails
   thruster
