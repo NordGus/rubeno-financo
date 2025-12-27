@@ -72,8 +72,8 @@ class FileSystem::Item < ApplicationRecord
       breadcrumbs = []
 
       loop do
-        breadcrumbs.prepend(current)
         break unless current.respond_to?(:parentable)
+        breadcrumbs.prepend(current)
         current = current.parentable
       end
 

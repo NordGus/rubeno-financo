@@ -14,7 +14,7 @@ class Account < ApplicationRecord
   has_many :child_credit_transactions, class_name: "Transaction", foreign_key: :to_parent_id, inverse_of: :to, dependent: :destroy
   has_many :child_debit_transactions, class_name: "Transaction", foreign_key: :from_parent_id, inverse_of: :from, dependent: :destroy
 
-  has_one :file_system, as: :mountable, dependent: :destroy
+  has_one :file_system, class_name: "FileSystem::Item::Mount", as: :parentable, dependent: :destroy
 
   def transactions
     Transaction.where(from_id: id)

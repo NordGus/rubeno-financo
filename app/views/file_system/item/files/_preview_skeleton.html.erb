@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(file), src: file_system_file_path(file_system, file), class: "file-previewer" do %>
+<%= turbo_frame_tag dom_id(file), src: file_system_item_file_path(file), class: "file-previewer" do %>
   <div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
     <h4 style="flex: 1; text-align: center">File Details</h4>
     <button data-action="click->dialog#close">

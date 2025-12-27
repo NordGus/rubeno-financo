@@ -1,12 +1,12 @@
 <div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
   <h4 style="flex: 1; text-align: center"><%= file.file_system_route.map(&:name).join("/") %></h4>
-  <button data-action="click->dialog#close">
+  <button data-action="click->dialog#close" data-dialog="<%= dom_id(file) %>">
     <i class="fa-solid fa-xmark lg-xs"></i>
   </button>
 </div>
 <div class="body" style="display: flex; gap: 1rem;">
   <% if file.file.image? %>
-    <%= image_tag attachment_file_system_file_path(file_system, file), width: 600, height: 600, alt: file.name %>
+    <%= image_tag attachment_file_system_item_file_path(file), width: 600, height: 600, alt: file.name %>
   <% end %>
   <div>
     <p>Name: <%= file.name %></p>
@@ -14,12 +14,12 @@
     <% if file.versions.any? %>
       <h6>Versions</h6>
       <% file.versions.each do |version| %>
-        <%= link_to download_file_system_file_path(file_system, version), target: "_blank" do %>
+        <%= link_to download_file_system_item_file_path(version), target: "_blank" do %>
           <p><%= version.version %>: <%= number_to_human_size(version.file.byte_size) %></p>
         <% end %>
       <% end %>
     <% end %>
-    <%= link_to download_file_system_file_path(file_system, file), target: "_blank" do %>
+    <%= link_to download_file_system_item_file_path(file), target: "_blank" do %>
       <button><i class="fa-solid fa-download"></i> Download</button>
     <% end %>
     <div data-controller="confirmation-alert" style="margin: 0;">
@@ -37,7 +37,7 @@
           <button data-action="click->confirmation-alert#cancel">No</button>
           <%=
             button_to "Yes",
-                      file_system_file_path(file_system, file),
+                      file_system_item_file_path(file),
                       method: :delete,
                       data: {
                         action: "click->confirmation-alert#close click->dialog#close",

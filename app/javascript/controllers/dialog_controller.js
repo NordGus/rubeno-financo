@@ -8,14 +8,14 @@ export default class extends Controller {
   open(event) {
     event.preventDefault()
     const dialog_name = event.currentTarget.dataset.dialog
-    const dialog = this.element.getElementsByTagName("dialog").namedItem(dialog_name)
+    const dialog = this.element.querySelector(`dialog#${dialog_name}`)
 
     dialog.showModal()
   }
 
   close(event) {
     const dialog_name = event.currentTarget.dataset.dialog
-    const dialog = this.element.getElementsByTagName("dialog").namedItem(dialog_name)
+    const dialog = this.element.querySelector(`dialog#${dialog_name}`)
 
     dialog.close()
   }

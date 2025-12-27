@@ -7,6 +7,6 @@
 </p>
 
 <%= turbo_stream_from @test_account.file_system, "contents" %>
-<%= turbo_frame_tag dom_id(@test_account.file_system), src: file_system_path(@test_account.file_system) do %>
+<%= turbo_frame_tag dom_id(@test_account.file_system), src: file_system_item_mount_path(@test_account.file_system) do %>
   <p>Loading...</p>
 <% end %>
