@@ -3,7 +3,7 @@
 _fixture:
   ignore:
     - protagonist_file_system_item_mount_base
-    - protagonist_shared_family_archive
+    - protagonist_shared_family_file_system_item_mount_base
 
 DEFAULTS: &DEFAULTS
   type: <%= FileSystem::Item::Mount.name %>
@@ -129,7 +129,7 @@ protagonist_shared_family_archive_palace_repairs_loan_file_system:
 protagonist_shared_family_repairs_expense_file_system:
   <<: *protagonist_shared_family_file_system_item_mount_base
   parentable: protagonist_shared_family_repairs_expense (Account::Category::Expense)
-  description: "Repairs for the Hancock's Palace"
+  name: "Repairs"
 
 protagonist_shared_family_roof_repairs_expense_file_system:
   <<: *protagonist_shared_family_file_system_item_mount_base
@@ -159,12 +159,12 @@ protagonist_shared_family_groceries_food_expense_file_system:
 protagonist_shared_family_bounty_income_file_system:
   <<: *protagonist_shared_family_file_system_item_mount_base
   parentable: protagonist_shared_family_bounty_income (Account::Category::Income)
-  description: "Bounties Kuja Pirates collect"
+  name: "Bounties"
 
 protagonist_shared_family_treasure_income_file_system:
   <<: *protagonist_shared_family_file_system_item_mount_base
   parentable: protagonist_shared_family_treasure_income (Account::Category::Income)
-  description: "Treasure found by the Kuja Pirates"
+  name: "Treasure"
 
 protagonist_shared_family_treasure_booty_income_file_system:
   <<: *protagonist_shared_family_file_system_item_mount_base

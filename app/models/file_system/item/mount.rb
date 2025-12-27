@@ -4,6 +4,9 @@
 # FileSystem::Item::Mount represents the mounting point for a pseudo file system abstraction over Active Storage so
 # characters can store file related to other financo models parentable and define their own structure.
 class FileSystem::Item::Mount < FileSystem::Item
+  has_many :directories, class_name: "FileSystem::Item::Directory", as: :parentable, dependent: :destroy
+  has_many :files, class_name: "FileSystem::Item::File", as: :parentable, dependent: :destroy
+
   # before validating the record, we need to set the name to that of its parentable.
   before_validation { |record|record.name = record.parentable&.name unless record.name == record.parentable&.name }
 

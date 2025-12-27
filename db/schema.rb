@@ -124,7 +124,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_12_002232) do
     t.index ["deleted_at"], name: "file_system_items_deleted_at_index"
     t.index ["name", "parentable_type", "parentable_id"], name: "file_system_items_name_uniqueness_index", unique: true, where: "parentable_type != 'FileSystem::Item::File'"
     t.index ["name"], name: "index_file_system_items_on_name"
-    t.index ["parentable_type", "parentable_id"], name: "file_system_items_mount_uniqueness_index", unique: true, where: "parentable_type = 'FileSystem::Item::Mount'"
+    t.index ["parentable_type", "parentable_id"], name: "file_system_items_mount_uniqueness_index", unique: true, where: "type == 'FileSystem::Item::Mount'"
     t.index ["parentable_type", "parentable_id"], name: "file_system_items_parentable_index"
     t.index ["type"], name: "file_system_items_type_index"
   end
