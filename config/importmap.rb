@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "@fortawesome/fontawesome-free", to: "@fortawesome--fontawesome-free--js--all.js" # @7.1.0
+pin "@rails/activestorage", to: "@rails--activestorage.js" # @8.1.100
