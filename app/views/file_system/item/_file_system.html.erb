@@ -11,19 +11,31 @@
       <span>/</span>
     <% end %>
   </div>
-  <div class="file-system-items" data-controller="dialog">
-    <% item.directories.in_system.order(params.fetch(:order_by, "name") => params.fetch(:order_direction, "desc")).find_each do |directory| %>
-      <%= link_to file_system_item_directory_path(directory, target: params[:target] || dom_id(item)), class: "file-system-item" do %>
-        <i class="fa-solid fa-folder"></i> <span><%= directory.name %></span>
+  <div
+    data-controller="drag-and-drop-uploads"
+    data-drag-and-drop-uploads-parentable-id-value="<%= item.id %>"
+    data-drag-and-drop-uploads-parentable-type-value="<%= item.class.name %>"
+    data-drag-and-drop-uploads-url-value="<%= upload_file_system_item_files_path %>"
+  >
+    <div>
+      <%# Tool Buttons area %>
+      <%# Hidden file input to trigger the browser's direct upload logic %>
+      <input type="file" multiple class="hidden" data-hidden data-drag-drop-target="input" data-action="change->drag-drop#upload">
+    </div>
+    <div class="file-system-items" data-controller="dialog">
+      <% item.directories.in_system.order(params.fetch(:order_by, "name") => params.fetch(:order_direction, "desc")).find_each do |directory| %>
+        <%= link_to file_system_item_directory_path(directory, target: params[:target] || dom_id(item)), class: "file-system-item" do %>
+          <i class="fa-solid fa-folder"></i> <span><%= directory.name %></span>
+        <% end %>
       <% end %>
-    <% end %>
-    <% item.files.in_system.order(params.fetch(:order_by, "name") => params.fetch(:order_direction, "desc")).find_each do |file| %>
-      <%= link_to download_file_system_item_file_path(file), id: dom_id(file), class: "file-system-item", target: "_blank", data: { action: "click->dialog#open", dialog: dom_id(file) } do %>
-        <i class="fa-regular fa-file"></i> <span><%= file.name %></span>
+      <% item.files.in_system.order(params.fetch(:order_by, "name") => params.fetch(:order_direction, "desc")).find_each do |file| %>
+        <%= link_to download_file_system_item_file_path(file), id: dom_id(file), class: "file-system-item", target: "_blank", data: { action: "click->dialog#open", dialog: dom_id(file) } do %>
+          <i class="fa-regular fa-file"></i> <span><%= file.name %></span>
+        <% end %>
+        <dialog name="<%= dom_id(file) %>" data-dialog-target="dialog" id="<%= dom_id(file) %>">
+          <%= render partial: "file_system/item/files/preview_skeleton", locals: { file: } %>
+        </dialog>
       <% end %>
-      <dialog name="<%= dom_id(file) %>" data-dialog-target="dialog" id="<%= dom_id(file) %>">
-        <%= render partial: "file_system/item/files/preview_skeleton", locals: { file: } %>
-      </dialog>
-    <% end %>
+    </div>
   </div>
 </section>

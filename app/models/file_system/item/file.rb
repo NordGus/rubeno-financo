@@ -7,7 +7,7 @@ class FileSystem::Item::File < FileSystem::Item
 
   scope :latest_versions, -> { where.not(parentable_type: FileSystem::Item::File.name) }
 
-  # FileSystem::Item::File can only be a child of a FileSystem, a Directory or a File. When the File is a child of
-  # another File, it is considered a version of the parent File.
-  validates :parentable_type, inclusion: { in: [ FileSystem.name, FileSystem::Item::Directory.name, FileSystem::Item::File.name ] }
+  # FileSystem::Item::File can only be a child of a Mount, a Directory or a File. When the File is a child of another
+  # File, it is considered a version of the parent File.
+  validates :parentable_type, inclusion: { in: [ FileSystem::Item::Mount.name, FileSystem::Item::Directory.name, FileSystem::Item::File.name ] }
 end

@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :file_system do
-    namespace :item do
-      get "mounts/show"
-    end
-    get "directories/show"
-  end
   mount MissionControl::Jobs::Engine, at: "/admin/jobs"
 
   root "app/welcome#index"
@@ -22,9 +16,10 @@ Rails.application.routes.draw do
     namespace :item do
       resources :mounts, only: [ :show ]
       resources :directories, only: [ :show ]
-      resources :files, only: [ :show, :create, :edit, :update, :destroy ] do
+      resources :files, only: [ :show, :edit, :update, :destroy ] do
         get :attachment, on: :member
         get :download, on: :member
+        post :upload, on: :collection
       end
     end
   end
