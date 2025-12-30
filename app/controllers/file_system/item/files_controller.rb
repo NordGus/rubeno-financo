@@ -8,32 +8,7 @@ class FileSystem::Item::FilesController < ApplicationController
   end
 
   def create
-    @file = FileSystem::Item::File.current.new(upload_file_params)
-    @file.name = @file.file.filename.to_s
-
-    previous_version = FileSystem::Item::File.includes(:versions).find_by(parentable: @file.parentable, name: @file.name)
-
-    @file.transaction do
-      # if there's a file with the same name in the parentable we need to make the name unique, so we version it
-      @file.name = [ @file.version, @file.name ].join("_") if previous_version
-
-      @file.save!
-
-      # if there's a previous version of the file, we need to make it the latest version by changing the previous
-      # version subtree, the versions subtree of the new file and then rename it back to the duplicated name.
-      if previous_version
-        # Because the file name is already versioned, we just need to update their parent
-        previous_version.versions.each { |version| version.update!(parentable: @file) }
-        # Because the previous version is not versioned, we need to update its name and parent
-        previous_version.update!(name: [ previous_version.version, previous_version.name ].join("_"), parentable: @file)
-        # Finally, we rename the file to its original name
-        @file.update!(name: @file.file.filename.to_s)
-      end
-
-      @file.reload
-    rescue StandardError => _e
-      raise ActiveRecord::Rollback
-    end
+    @file = FileSystem::Item::File.create_new_entry_or_version(**upload_file_params)
 
     if @file.persisted?
       @file.parentable.broadcast_update_to(
@@ -95,10 +70,10 @@ class FileSystem::Item::FilesController < ApplicationController
   end
 
   def upload_file_params
-    params[:version] = Time.current.to_fs(:number)
-    params[:file] = params.require(:signed_id)
-
-    params.permit(:file, :parentable_id, :parentable_type, :version)
+    params.permit(:parentable_id, :parentable_type).to_h.with_indifferent_access.merge(
+      version: Time.current.to_fs(:number),
+      file: params.require(:signed_id)
+    )
   end
 
   def blob_args
