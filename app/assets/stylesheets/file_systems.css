@@ -20,4 +20,28 @@
             gap: 0.5rem;
         }
     }
+
+    .upload-preview {
+        position: relative;
+
+        &::after {
+            --background-zone-color: rgba(from var(--color-border) r g b / 0.5);
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: stretch;
+            width: stretch;
+            border: 4px dashed var(--color-border);
+            outline: 0.75rem solid var(--background-zone-color);
+            margin: 0.75rem;
+            content: "Drop files here to upload";
+            background-color: var(--background-zone-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }

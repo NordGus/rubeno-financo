@@ -3,34 +3,44 @@ import { DirectUpload } from "@rails/activestorage"
 
 // Connects to data-controller="drag-and-drop-uploads"
 export default class extends Controller {
-  static targets = ["input"]
+  static targets = ["input", "dropzone"]
   static values = { url: String, uploadUrl: String, parentableType: String, parentableId: Number }
 
   connect() {
-    this.element.addEventListener("dragover", this.preventDrag.bind(this))
-    this.element.addEventListener("drop", this.drop.bind(this))
+    this.dropzoneTarget.addEventListener("dragover", this.preventDrag.bind(this))
+    this.dropzoneTarget.addEventListener("drop", this.drop.bind(this))
+    this.dropzoneTarget.addEventListener("dragleave", this.drop.bind(this))
   }
 
   disconnect() {
-    this.element.removeEventListener("dragover", this.preventDrag.bind(this))
-    this.element.removeEventListener("drop", this.drop.bind(this))
+    this.dropzoneTarget.removeEventListener("dragover", this.preventDrag.bind(this))
+    this.dropzoneTarget.removeEventListener("drop", this.drop.bind(this))
+    this.dropzoneTarget.removeEventListener("dragleave", this.drop.bind(this))
   }
 
   preventDrag(event) {
     event.preventDefault()
     event.stopPropagation()
 
-    if (!this.element.classList.contains("upload-preview")) this.element.classList.add("upload-preview")
+    if (!this.dropzoneTarget.classList.contains("upload-preview")) this.dropzoneTarget.classList.add("upload-preview")
+  }
+
+  dragExited(event) {
+    event.preventDefault()
+
+    if (this.dropzoneTarget.classList.contains("upload-preview")) this.dropzoneTarget.classList.remove("upload-preview")
   }
 
   drop(event) {
     this.preventDrag(event)
+    if (this.dropzoneTarget.classList.contains("upload-preview")) this.dropzoneTarget.classList.remove("upload-preview")
+
     const files = event.dataTransfer.files
     Array.from(files).forEach(file => this.uploadFile(file))
   }
 
   uploadFile(file) {
-    const direct_upload = new DirectUpload(file, "/rails/active_storage/direct_uploads")
+    const direct_upload = new DirectUpload(file, "/file_system/item/files/upload")
 
     direct_upload.create((error, blob) => {
       if (error) {
@@ -38,13 +48,13 @@ export default class extends Controller {
 
         this.element.classList.remove("upload-preview")
       } else {
-        this.createFileEntry(blob.signed_id)
+        this.#createFileEntry(blob.signed_id).then()
       }
     })
   }
 
-  createFileEntry(signed_id) {
-    fetch(this.urlValue, {
+  async #createFileEntry(signed_id) {
+    await fetch(this.urlValue, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,11 +66,6 @@ export default class extends Controller {
         parentable_type: this.parentableTypeValue,
         parentable_id: this.parentableIdValue
       })
-    })
-    .finally(() => {
-      if (!this.element.classList.contains("upload-preview")) return
-
-      this.element.classList.remove("upload-preview")
     })
   }
 }
