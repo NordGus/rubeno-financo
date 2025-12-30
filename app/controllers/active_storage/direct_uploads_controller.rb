@@ -5,25 +5,6 @@
 # the blob that was created up front.
 class ActiveStorage::DirectUploadsController < ActiveStorage::BaseController
   def create
-    blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
-
-    json = direct_upload_json(blob)
-
-    # TODO: Implement a notifications channel and partial to communicate the upload progress to the client using
-    #   ActionCable.
-
-    render json:
-  end
-
-  private
-  def blob_args
-    params.expect(blob: [ :filename, :byte_size, :checksum, :content_type, metadata: {} ]).to_h.symbolize_keys
-  end
-
-  def direct_upload_json(blob)
-    blob.as_json(root: false, methods: :signed_id).merge(direct_upload: {
-      url: blob.service_url_for_direct_upload,
-      headers: blob.service_headers_for_direct_upload
-    })
+    head :not_found
   end
 end

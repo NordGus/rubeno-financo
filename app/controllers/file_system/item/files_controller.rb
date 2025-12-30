@@ -2,11 +2,12 @@
 
 class FileSystem::Item::FilesController < ApplicationController
   before_action :set_file, only: [ :show, :destroy, :attachment, :download ]
+  before_action :set_active_storage_url_options, only: [ :upload ]
 
   def show
   end
 
-  def upload
+  def create
     @file = FileSystem::Item::File.current.new(upload_file_params)
     @file.name = @file.file.filename.to_s
 
@@ -48,6 +49,17 @@ class FileSystem::Item::FilesController < ApplicationController
     end
   end
 
+  def upload
+    blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args.merge(service_name: :file_system))
+
+    json = direct_upload_json(blob)
+
+    # TODO: Implement a notifications channel and partial to communicate the upload progress to the client using
+    #   ActionCable.
+
+    render json:
+  end
+
   def destroy
     if @file.soft_destroy
       @file.broadcast_remove_to [ @file_system, "contents" ], targets: @file
@@ -73,14 +85,30 @@ class FileSystem::Item::FilesController < ApplicationController
   end
 
   private
-    def set_file
-      @file = FileSystem::Item::File.current.in_system.find(params.expect(:id))
-    end
 
-    def upload_file_params
-      params[:version] = Time.current.to_fs(:number)
-      params[:file] = params.require(:signed_id)
+  def set_active_storage_url_options
+    ActiveStorage::Current.url_options = { protocol: request.protocol, host: request.host, port: request.port }
+  end
 
-      params.permit(:file, :parentable_id, :parentable_type, :version)
-    end
+  def set_file
+    @file = FileSystem::Item::File.current.in_system.find(params.expect(:id))
+  end
+
+  def upload_file_params
+    params[:version] = Time.current.to_fs(:number)
+    params[:file] = params.require(:signed_id)
+
+    params.permit(:file, :parentable_id, :parentable_type, :version)
+  end
+
+  def blob_args
+    params.expect(blob: [ :filename, :byte_size, :checksum, :content_type, metadata: {} ]).to_h.symbolize_keys
+  end
+
+  def direct_upload_json(blob)
+    blob.as_json(root: false, methods: :signed_id).merge(direct_upload: {
+      url: blob.service_url_for_direct_upload,
+      headers: blob.service_headers_for_direct_upload
+    })
+  end
 end
