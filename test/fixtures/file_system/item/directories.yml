@@ -1,0 +1,53 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# We are only populating protagonist_archive_checking_account and protagonist_archive_bounty_income file systems with
+# some data for demonstration purposes.
+#
+# The idea is to show a full order system structure with multiple directories, nested directories and files with its
+# versions for protagonist_archive_checking_account and a simple flat one with all the files, some with versions, in the
+# root of the file system for protagonist_archive_bounty_income.
+
+_fixture:
+  ignore:
+    - protagonist_archive_checking_account_file_system_base_item
+
+protagonist_archive_checking_account_file_system_base_item: &protagonist_archive_checking_account_file_system_base_item
+  archive: protagonist_archive
+  parentable: protagonist_archive_checking_account_file_system (FileSystem::Item::Mount)
+
+DEFAULTS: &DEFAULTS
+  type: <%= FileSystem::Item::Directory.name %>
+  version: <%= Time.current.to_fs(:number) %>
+
+protagonist_archive_checking_account_file_system_bounties_directory:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Bounties"
+
+protagonist_archive_checking_account_file_system_bounties_current_year_directory:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: <%= Time.current.year.to_s %>
+  parentable: protagonist_archive_checking_account_file_system_bounties_directory (FileSystem::Item::Directory)
+
+protagonist_archive_checking_account_file_system_ships_repairs_directory:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Ship's Receipts"
+
+protagonist_archive_checking_account_file_system_groceries_directory:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: "Groceries"
+
+protagonist_archive_checking_account_file_system_current_year_groceries_directory:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: <%= Time.current.year.to_s %>
+  parentable: protagonist_archive_checking_account_file_system_groceries_directory (FileSystem::Item::Directory)
+
+protagonist_archive_checking_account_file_system_current_month_groceries_directory:
+  <<: *DEFAULTS
+  <<: *protagonist_archive_checking_account_file_system_base_item
+  name: <%= Time.current.strftime("%B") %>
+  parentable: protagonist_archive_checking_account_file_system_current_year_groceries_directory (FileSystem::Item::Directory)

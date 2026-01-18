@@ -1,0 +1,54 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+DEFAULTS: &DEFAULTS
+  balance: 0.0
+  at: nil
+
+# Protagonist's archive accounts'
+
+protagonist_archive_checking_account_history_config:
+  <<: *DEFAULTS
+  account: protagonist_archive_checking_account_history
+  balance: 1337.42
+  at: <%= Time.current - (4.months + 21.days) %>
+
+protagonist_archive_treasure_account_history_config:
+  <<: *DEFAULTS
+  account: protagonist_archive_treasure_account_history
+
+protagonist_archive_sunny_repairs_loan_history_config:
+  <<: *DEFAULTS
+  account: protagonist_archive_sunny_repairs_loan_history
+  balance: -69420.33
+  at: <%= Time.current - (2.year + 8.months + 14.days) %>
+
+protagonist_archive_wano_kuni_credit_line_history_config:
+  <<: *DEFAULTS
+  account: protagonist_archive_wano_kuni_credit_line_history
+
+# Family Shared Finances accounts'
+
+protagonist_shared_family_archive_checking_account_history_config:
+  <<: *DEFAULTS
+  account: protagonist_shared_family_archive_checking_account_history
+  balance: 1337420.69
+  at: <%= Time.current - (2.year + 4.months + 2.days) %>
+
+protagonist_shared_family_archive_treasure_account_history_config:
+  <<: *DEFAULTS
+  account: protagonist_shared_family_archive_treasure_account_history
+  balance: 42069.49
+  at: <%= Time.current - (2.year + 6.months + 8.days) %>
+
+protagonist_shared_family_archive_palace_repairs_loan_history_config:
+  <<: *DEFAULTS
+  account: protagonist_shared_family_archive_palace_repairs_loan_history
+  balance: -1234.33
+  at: <%= Time.current - (2.year + 6.months + 10.days) %>
+
+protagonist_shared_family_archive_hancock_credit_card_history_config:
+  <<: *DEFAULTS
+  account: protagonist_shared_family_archive_hancock_credit_card_history
+  balance: 100000.00
+  at: <%= Time.current - (9.months + 15.days) %>
+

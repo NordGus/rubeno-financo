@@ -1,0 +1,55 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+_fixture:
+  ignore:
+    - protagonist_archive_base_income
+    - protagonist_shared_family_archive_base_income
+
+DEFAULTS: &DEFAULTS
+  type: <%= Account::Category::Income.name %>
+  currency: <%= Account.currencies[:multi] %>
+
+protagonist_archive_base_income: &protagonist_archive_base_income
+  <<: *DEFAULTS
+  archive: protagonist_archive
+
+protagonist_shared_family_archive_base_income: &protagonist_shared_family_archive_base_income
+  <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+
+protagonist_archive_donations_income:
+  <<: *protagonist_archive_base_income
+  name: "Donations"
+  description: "Donations that people gives us for helping them"
+
+protagonist_archive_bounty_income:
+  <<: *protagonist_archive_base_income
+  name: "Bounties"
+  description: "Bounties we collect from giving criminals to the islands we help"
+
+protagonist_archive_treasure_income:
+  <<: *protagonist_archive_base_income
+  name: "Treasure"
+  description: "Treasure we find on our travels"
+
+protagonist_archive_treasure_booty_income:
+  <<: *protagonist_archive_base_income
+  name: "Booty"
+  description: "Treasure take from our enemies"
+  parent: protagonist_archive_treasure_income
+
+protagonist_shared_family_bounty_income:
+  <<: *protagonist_shared_family_archive_base_income
+  name: "Bounties"
+  description: "Bounties Kuja Pirates collect"
+
+protagonist_shared_family_treasure_income:
+  <<: *protagonist_shared_family_archive_base_income
+  name: "Treasure"
+  description: "Treasure found by the Kuja Pirates"
+
+protagonist_shared_family_treasure_booty_income:
+  <<: *protagonist_shared_family_archive_base_income
+  name: "Booty"
+  description: "Treasure taken from Kuja Pirates' enemies"
+  parent: protagonist_archive_treasure_income

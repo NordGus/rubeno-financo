@@ -28,15 +28,44 @@
         --color-border: #334155;
         --color-link: #3892ff;
     }
+
+    img.directory-icon {
+        filter: invert(95%) sepia(10%) saturate(60%) hue-rotate(173deg) brightness(97%) contrast(105%) !important;
+    }
 }
 
-/* Example usage */
+* {
+    font-family: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: var(--color-text);
+}
+
 body {
     background-color: var(--color-bg);
-    color: var(--color-text);
-    font-family: Inter, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 a {
     color: var(--color-link);
+}
+
+.bread-crumbs {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    margin-bottom: var(--spacing-3);
+}
+
+button {
+    background-color: var(--color-bg-adcent);
+    cursor: pointer;
+}
+
+dialog {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    padding: 0;
+}
+
+::backdrop {
+    background-color: var(--color-bg-adcent);
+    opacity: 0.5;
 }

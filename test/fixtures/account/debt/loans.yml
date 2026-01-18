@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+_fixture:
+  ignore:
+    - protagonist_archive_base_loan
+    - protagonist_shared_family_archive_base_loan
+
+DEFAULTS: &DEFAULTS
+  type: <%= Account::Debt::Loan.name %>
+
+protagonist_archive_base_loan: &protagonist_archive_base_loan
+  <<: *DEFAULTS
+  archive: protagonist_archive
+  currency: <%= Account.currencies[:usd] %>
+
+protagonist_shared_family_archive_base_loan: &protagonist_shared_family_archive_base_loan
+  <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+  currency: <%= Account.currencies[:eur] %>
+
+protagonist_archive_sunny_repairs_loan:
+  <<: *protagonist_archive_base_loan
+  name: "Sunny Repairs"
+  description: "Galley-La Loan for sending materials to repair the Sunny"
+
+protagonist_shared_family_archive_palace_repairs_loan:
+  <<: *protagonist_shared_family_archive_base_loan
+  name: "Roof repairs"
+  description: "Loan to repair Hancock's roof"

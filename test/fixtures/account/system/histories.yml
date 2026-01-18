@@ -1,0 +1,57 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+_fixture:
+  ignore:
+    - protagonist_archive_base_account
+    - protagonist_shared_family_archive_base_account
+
+DEFAULTS: &DEFAULTS
+  type: <%= Account::System::History.name %>
+  name: <%= Account::System::History::FIXED_NAME %>
+  description: <%= Account::System::History::FIXED_DESCRIPTION %>
+
+protagonist_archive_base_account: &protagonist_archive_base_account
+  <<: *DEFAULTS
+  archive: protagonist_archive
+  currency: <%= Account.currencies[:usd] %>
+
+protagonist_shared_family_archive_base_account: &protagonist_shared_family_archive_base_account
+  <<: *DEFAULTS
+  archive: protagonist_shared_family_archive
+  currency: <%= Account.currencies[:eur] %>
+
+## Protagonist's archive accounts
+
+protagonist_archive_checking_account_history:
+  <<: *protagonist_archive_base_account
+  parent: protagonist_archive_checking_account
+
+protagonist_archive_treasure_account_history:
+  <<: *protagonist_archive_base_account
+  parent: protagonist_archive_treasure_account
+
+protagonist_archive_sunny_repairs_loan_history:
+  <<: *protagonist_archive_base_account
+  parent: protagonist_archive_sunny_repairs_loan
+
+protagonist_archive_wano_kuni_credit_line_history:
+  <<: *protagonist_archive_base_account
+  parent: protagonist_archive_wano_kuni_credit_line
+
+## Family Shared Finances accounts
+
+protagonist_shared_family_archive_checking_account_history:
+  <<: *protagonist_shared_family_archive_base_account
+  parent: protagonist_shared_family_archive_checking_account
+
+protagonist_shared_family_archive_treasure_account_history:
+  <<: *protagonist_shared_family_archive_base_account
+  parent: protagonist_shared_family_archive_treasure_account
+
+protagonist_shared_family_archive_palace_repairs_loan_history:
+  <<: *protagonist_shared_family_archive_base_account
+  parent: protagonist_shared_family_archive_palace_repairs_loan
+
+protagonist_shared_family_archive_hancock_credit_card_history:
+  <<: *protagonist_shared_family_archive_base_account
+  parent: protagonist_shared_family_archive_hancock_credit_card

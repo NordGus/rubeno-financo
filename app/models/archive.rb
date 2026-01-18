@@ -2,6 +2,12 @@ class Archive < ApplicationRecord
   belongs_to :owner, class_name: "Character", foreign_key: :owner_id
   has_many :sessions, dependent: :nullify, foreign_key: :archive_id
   has_many :access_keys, class_name: "Archive::AccessKey", dependent: :destroy, inverse_of: :archive
+  has_many :accounts, inverse_of: :archive, dependent: :destroy
+  has_many :transactions, class_name: "Transaction", inverse_of: :archive, dependent: :destroy
+  has_many :file_systems, class_name: "FileSystem", inverse_of: :archive, dependent: :destroy
+  has_many :file_system_items, class_name: "FileSystem::Item", inverse_of: :archive, dependent: :destroy
+  has_many :file_system_directories, class_name: "FileSystem::Item::Directory", dependent: :destroy
+  has_many :file_system_files, class_name: "FileSystem::Item::File", dependent: :destroy
 
   accepts_nested_attributes_for :access_keys, reject_if: ->(attributes) { attributes["owner_id"].blank? }, allow_destroy: false
 

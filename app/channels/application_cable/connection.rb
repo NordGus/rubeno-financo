@@ -8,8 +8,8 @@ module ApplicationCable
 
     private
       def set_current_user
-        if session = Session.find_by(id: cookies.signed[:session_id])
-          self.current_user = session.user
+        if (session = Session.find_by(token: cookies.signed[Authentication::SESSION_IDENTIFIER_KEY]))
+          self.current_user = session.character
         end
       end
   end

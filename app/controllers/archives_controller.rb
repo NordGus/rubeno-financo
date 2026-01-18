@@ -1,7 +1,8 @@
-class ArchivesController < AppController
+class ArchivesController < ApplicationController
   allow_out_of_archive_access
 
   before_action :set_archive, only: %i[ edit update destroy ]
+  before_action :set_accessible_archive, only: [ :access, :exit ]
   before_action :set_characters, only: %i[ edit new ]
 
   # GET /app/archives or /app/archives.json
@@ -11,7 +12,7 @@ class ArchivesController < AppController
 
   # GET /app/archives/new
   def new
-    @archive = Archive.new
+    @archive = Current.character.archives.build
     @archive.access_keys.build(@characters.map { |character| { owner_id: character.id, owner: character } })
   end
 
@@ -21,11 +22,11 @@ class ArchivesController < AppController
 
   # POST /app/archives or /app/archives.json
   def create
-    @archive = Archive.new(archive_params)
+    @archive = Current.character.archives.build(archive_params)
 
     respond_to do |format|
       if @archive.save
-        format.html { redirect_to @archive, notice: "Archive was successfully created." }
+        format.html { redirect_to edit_archive_url(@archive), notice: "Archive was successfully created." }
         format.json { render :show, status: :created, location: @archive }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class ArchivesController < AppController
   def update
     respond_to do |format|
       if @archive.update(archive_params)
-        format.html { redirect_to @archive, notice: "Archive was successfully updated.", status: :see_other }
+        format.html { redirect_to edit_archive_url(@archive), notice: "Archive was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @archive }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,14 +60,24 @@ class ArchivesController < AppController
 
   # POST /app/archives/1/access
   def access
-    @archive = Archive.accessible_by(Current.character.id).find(params.expect(:id))
     Current.session.update!(archive: @archive)
+
     redirect_to root_url, notice: "#{@archive.name} selected!"
+  end
+
+  def exit
+    Current.session.update!(archive: nil)
+
+    redirect_to archives_url
   end
 
   private
     def set_archive
       @archive = Current.character.archives.find(params.expect(:id))
+    end
+
+    def set_accessible_archive
+      @archive = Archive.accessible_by(Current.character.id).find(params.expect(:id))
     end
 
     def set_characters

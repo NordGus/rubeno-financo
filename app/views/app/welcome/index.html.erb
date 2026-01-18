@@ -1,3 +1,12 @@
 <h1>App::Welcome#index</h1>
 <p>Find me in app/views/app/welcome/index.html.erb</p>
 <%= Current.character.tag %>
+
+<p>
+  <%= @test_account.name %>
+</p>
+
+<%= turbo_stream_from @test_account.file_system, "contents" %>
+<%= turbo_frame_tag dom_id(@test_account.file_system), src: file_system_item_mount_path(@test_account.file_system) do %>
+  <p>Loading...</p>
+<% end %>

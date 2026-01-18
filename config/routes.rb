@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount MissionControl::Jobs::Engine, at: "/jobs"
+  mount MissionControl::Jobs::Engine, at: "/admin/jobs"
 
   root "app/welcome#index"
 
@@ -9,6 +9,19 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: [ :new, :create, :edit, :update ]
   resources :archives, only: [ :index, :new, :create, :edit, :update, :destroy ] do
     post :access, on: :member
+    post :exit, on: :member
+  end
+
+  namespace :file_system do
+    namespace :item do
+      resources :mounts, only: [ :show ]
+      resources :directories, only: [ :show ]
+      resources :files, only: [ :show, :create, :edit, :update, :destroy ] do
+        get :attachment, on: :member
+        get :download, on: :member
+        post :upload, on: :collection
+      end
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -1,0 +1,26 @@
+[env]
+# Project information
+PROJECT_NAME = "{{ config_root | basename }}"
+
+[tools]
+ruby = "4.0.1"
+node = "22.20.0"
+
+[tasks."bundle:install"]
+description = "Install gem dependencies"
+run = "bundle install"
+
+[tasks.server]
+description = "Start the Rails server"
+alias = "s"
+run = "rails server"
+
+[tasks.test]
+description = "Run tests"
+alias = "t"
+run = "rails test"
+
+[tasks.lint]
+description = "Run lint using Rubocop"
+alias = "l"
+run = "rubocop"

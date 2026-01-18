@@ -1,0 +1,113 @@
+# For more information: https://edgeapi.rubyonrails.org/classes/ActiveStorage/FixtureSet.html
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_first_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Corgi_D_Luffy.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_second_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Corgi_D_Luffy.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_third_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Corgi_D_Luffy.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_luffy_bounty_file_fourth_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Corgi_D_Luffy.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_zoro_bounty_file_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Zoro.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_sanji_bounty_file_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Sanji.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_ussop_bounty_file_first_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_God_Usopp.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_ussop_bounty_file_second_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_God_Usopp.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_ussop_bounty_file_third_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_God_Usopp.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_galley_la_first_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-receipts-Galley-La - Thousand Sunny.xlsx",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_galley_la_second_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-receipts-Galley-La - Thousand Sunny.xlsx",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_wrapping_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-receipts-Wrapping - Thousand Sunny.pdf",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_checking_account_file_system_groceries_market_file_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-groceries-Gemini_Generated_Image_receipt.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_nami_bounty_file_first_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Nami.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_nami_bounty_file_second_version_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Nami.png",
+    service_name: "file_system"
+  )
+%>
+
+protagonist_archive_bounty_income_file_system_robin_bounty_file_blob: <%=
+  ActiveStorage::FixtureSet.blob(
+    filename: "for_file_system-bounties-Gemini_Generated_Image_Robin.png",
+    service_name: "file_system"
+  )
+%>

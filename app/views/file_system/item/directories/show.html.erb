@@ -1,0 +1,3 @@
+<%= turbo_frame_tag params.require(:target) || dom_id(@directory) do %>
+  <%= render partial: "file_system/item/file_system", locals: { item: @directory } %>
+<% end %>

@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Financo
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -25,5 +25,9 @@ module Financo
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.mission_control.jobs.http_basic_auth_enabled = false
+
+    # Because of the authentication mechanism, we don't need to draw the routes for Active Storage.
+    # financo handles these routes internally.
+    config.active_storage.draw_routes = false
   end
 end

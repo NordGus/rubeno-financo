@@ -1,0 +1,51 @@
+<div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+  <h4 style="flex: 1; text-align: center"><%= file.file_system_route.map(&:name).join("/") %></h4>
+  <button data-action="click->dialog#close" data-dialog="<%= dom_id(file) %>">
+    <i class="fa-solid fa-xmark lg-xs"></i>
+  </button>
+</div>
+<div class="body" style="display: flex; gap: 1rem;">
+  <% if file.file.image? %>
+    <%= image_tag attachment_file_system_item_file_path(file), width: 600, height: 600, alt: file.name %>
+  <% end %>
+  <div>
+    <p>Name: <%= file.name %></p>
+    <p>Size: <%= number_to_human_size(file.file.byte_size) %></p>
+    <% if file.versions.any? %>
+      <h6>Versions</h6>
+      <% file.versions.each do |version| %>
+        <%= link_to download_file_system_item_file_path(version), target: "_blank" do %>
+          <p><%= version.version %>: <%= number_to_human_size(version.file.byte_size) %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= link_to download_file_system_item_file_path(file), target: "_blank" do %>
+      <button><i class="fa-solid fa-download"></i> Download</button>
+    <% end %>
+    <div data-controller="confirmation-alert" style="margin: 0;">
+      <button data-action="click->confirmation-alert#open">
+        <i class="fa-solid fa-trash"></i> Delete
+      </button>
+      <dialog closedby="any" data-confirmation-alert-target="dialog" class="alert">
+        <div class="header" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+          <h4 style="flex: 1; text-align: center">Are you sure?</h4>
+        </div>
+        <div class="body" style="margin: 0; padding: 0;">
+          You are about to delete this file, this action cannot be undone.
+        </div>
+        <div style="margin: 0; padding: 0; display: flex; justify-content: flex-end; gap: 0.5rem;">
+          <button data-action="click->confirmation-alert#cancel">No</button>
+          <%=
+            button_to "Yes",
+                      file_system_item_file_path(file),
+                      method: :delete,
+                      data: {
+                        action: "click->confirmation-alert#close click->dialog#close",
+                        dialog: dom_id(file)
+                      }
+          %>
+        </div>
+      </dialog>
+    </div>
+  </div>
+</div>
